@@ -7,13 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ExpressionCalculator.ExpressionCalculator;
+
 
 public class GraphPanel extends JPanel implements MouseListener {
 	
 	private int xPixelsToValueConversionFactor;
 	private JTextField xTextField;
 	private String expression;
-	private GraphingCalculator calculator;
+	private ExpressionCalculator calculator;
 	private JTextField yTextField;
 	private JFrame displayXYpairWindow;
 	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
