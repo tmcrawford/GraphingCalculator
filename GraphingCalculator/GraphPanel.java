@@ -2,9 +2,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class GraphPlane implements MouseListener {
+public class GraphPanel implements MouseListener {
 
-	public GraphPlane() {
+	public GraphPanel() {
 		// TODO Auto-generated constructor stub
 	}
 
