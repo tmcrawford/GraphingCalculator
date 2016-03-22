@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import sun.swing.AccumulativeRunnable;
 //ECE 309 Lab 8 - Meagan Raviele, Isaiah Smoak, Timothy Crawford, Rachel Williams
 //WE COMPLETED THE EXTRA CREDIT PORTION OF THE LAB
 public class BusinessAccumulator implements Runnable, ActionListener, KeyListener  {
@@ -42,6 +44,7 @@ public class BusinessAccumulator implements Runnable, ActionListener, KeyListene
 		// loads it in dynamic memory 
 		System.out.println("ECE 309 Lab 8 - Meagan Raviele, Isaiah Smoak, Rachel Williams, Timothy Crawford");
 		new BusinessAccumulator(); 
+		
 	}
 	
 	public BusinessAccumulator() {
@@ -82,7 +85,6 @@ public class BusinessAccumulator implements Runnable, ActionListener, KeyListene
 		accumulateWindow.setVisible(true);
 		accumulateWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		accumulateWindow.setTitle("Accounting Calculator");
-		
 		inputArea.addKeyListener(this); 
 	}
 	
@@ -267,6 +269,11 @@ public class BusinessAccumulator implements Runnable, ActionListener, KeyListene
 		
 		// updating value of prevAmount for next calculation
 		prevAmount = totalAmt; 
+	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		accumulateWindow.dispose();
 	}
 
 }

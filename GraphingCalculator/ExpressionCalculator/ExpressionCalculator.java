@@ -661,4 +661,9 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 
 	public void keyTyped(KeyEvent arg0) {
 	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		calWindow.dispose();
+	}
 }

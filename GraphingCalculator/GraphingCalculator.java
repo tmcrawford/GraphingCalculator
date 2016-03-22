@@ -51,8 +51,8 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	private JRadioButton expressButton = new JRadioButton("Expression");
 	private JRadioButton graphButton = new JRadioButton("Graphing");
 	private ButtonGroup group = new ButtonGroup();
-	private BusinessAccumulator accum = new BusinessAccumulator();
-	private ExpressionCalculator expre = new ExpressionCalculator();
+	private BusinessAccumulator accum;
+	private ExpressionCalculator expre;
 
 	public GraphingCalculator() {
 		// TODO Auto-generated constructor stub
@@ -199,6 +199,11 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 			resultLabel.setText("Total: ");
 			//System.out.println("accum");
 			logArea.setVisible(true);
+			if(expre != null){
+				expre.close();
+				expre = null;
+			}
+			accum = new BusinessAccumulator();
 		}
 		else if(arg0.getSource() == expressButton){
 			currentMode = EXPRESSION_MODE;
@@ -207,6 +212,12 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 			resultLabel.setText("Result: ");
 			xIncrementField.setEditable(false);
 			logArea.setVisible(true);
+			
+			if(accum != null){
+				accum.close();
+				accum = null;
+			}
+			expre = new ExpressionCalculator();
 			//System.out.println("express");
 		}
 		else if(arg0.getSource() == graphButton){
