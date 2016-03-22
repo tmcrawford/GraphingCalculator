@@ -6,6 +6,8 @@ public class GraphingCalculator {
 	}
 
 	public static void main(String[] args) {
+		
+		System.out.println("Hello everyone GitHub is live");
 		// TODO Auto-generated method stub
 
 	}
