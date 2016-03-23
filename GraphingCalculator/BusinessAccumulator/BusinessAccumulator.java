@@ -82,8 +82,9 @@ public class BusinessAccumulator implements Runnable, ActionListener, KeyListene
 		accumulateWindow.getContentPane().add(accountScrollPane, "Center");
 		accumulateWindow.getContentPane().add(errorOutput, "South");
 		accumulateWindow.setSize(800, 600);
+		accumulateWindow.setLocation(300, 300);
 		accumulateWindow.setVisible(true);
-		accumulateWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		accumulateWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		accumulateWindow.setTitle("Accounting Calculator");
 		inputArea.addKeyListener(this); 
 	}

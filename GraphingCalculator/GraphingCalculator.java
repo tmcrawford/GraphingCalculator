@@ -47,18 +47,11 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	private JPanel mainPanel = new JPanel();	
 	private JButton clearButton = new JButton("CLEAR");
 	private JFrame calWindow = new JFrame("Lab 10: Graphing Calculator");
-	private JRadioButton accumuButton = new JRadioButton("Accumulate");
-	private JRadioButton expressButton = new JRadioButton("Expression");
-	private JRadioButton graphButton = new JRadioButton("Graphing");
-	private ButtonGroup group = new ButtonGroup();
-	private BusinessAccumulator accum;
 	private ExpressionCalculator expre;
 
 	public GraphingCalculator() {
 		// TODO Auto-generated constructor stub
 		// Formatting fonts and colors
-		inputVarBox.setEditable(false); //initial!
-		xIncrementField.setEditable(false);
 		varLabel.setFont(new Font("default", Font.BOLD, 20));
 		inputBox.setFont(new Font("default", Font.BOLD, 20));
 		inputVarBox.setFont(new Font("default", Font.BOLD, 20));
@@ -73,19 +66,9 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputLabel.setFont(new Font("default", Font.BOLD, 20));
 		resultLabel.setFont(new Font("default", Font.BOLD, 20));
 		xIncrementLabel.setFont(new Font("default", Font.BOLD, 20));
-		accumuButton.setFont(new Font("default", Font.BOLD, 15));
-		expressButton.setFont(new Font("default", Font.BOLD, 15));
-		graphButton.setFont(new Font("default", Font.BOLD, 15));
 		// Formatting input box sizes
 		inputVarBox.setPreferredSize(new Dimension(100, 30)); // Set fixed size
-		group.add(accumuButton);
-		group.add(expressButton);
-		group.add(graphButton);
-		accumuButton.addActionListener(this);// box
-		expressButton.addActionListener(this);
-		graphButton.addActionListener(this);
-		//can have one set to true by default with command below
-		accumuButton.setSelected(true);
+		
 		
 		inputBox.setPreferredSize(new Dimension(350, 30)); // Set fixed size of
 		xIncrementField.setPreferredSize(new Dimension(100,30));		// expression box
@@ -96,9 +79,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		//inputPanel.add(inputBox);
 
 		// Adding components to the second panel
-		inputPanel.add(accumuButton);
-		inputPanel.add(expressButton);
-		inputPanel.add(graphButton);
+
 		inputPanel.add(Box.createRigidArea(new Dimension(100,0)));
 		inputPanel.add(resultLabel);
 		inputPanel.add(resultBox);
@@ -114,9 +95,10 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		// Formatting display area
 		Dimension display_size = new Dimension(800, 400);
 		calWindow.setSize(display_size);
+		calWindow.setLocation(300, 300);
 		calWindow.setMinimumSize(display_size);
 		calWindow.setVisible(true);
-		calWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		calWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// Formatting log area
 		logArea.setSize(calWindow.getWidth() - 10, 100);
@@ -147,7 +129,6 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		System.out.println("Hello everyone GitHub is live");
 		// TODO Auto-generated method stub
 		new GraphingCalculator();
-
 	}
 
 	// =======calculator expression code ===================
@@ -159,20 +140,8 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		if(kp.getKeyCode() == KeyEvent.VK_ENTER) {
 			// Clear the message box
 			errorMessage.setText("");
-			switch(currentMode){
-			case ACCUMULATE_MODE:
-				System.out.println("accumulate code here");
-				//accumulate(); //these functions automatically take care of updating display + log
-				break;
-			case EXPRESSION_MODE:
-				System.out.println("expresse code here");
-				//calculateExpression();
-				break;
-			case GRAPHING_MODE:
-				System.out.println("graph code here");
-				//graph();
-				break;
-			}
+			
+			
 		}
 	}
 
@@ -191,44 +160,12 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		if(arg0.getSource() == accumuButton ){
-			inputLabel.setText("Accumulate: ");
-			inputVarBox.setEditable(false);
-			currentMode = ACCUMULATE_MODE;
-			xIncrementField.setEditable(false);
-			resultLabel.setText("Total: ");
-			//System.out.println("accum");
-			logArea.setVisible(true);
-			if(expre != null){
-				expre.close();
-				expre = null;
-			}
-			accum = new BusinessAccumulator();
-		}
-		else if(arg0.getSource() == expressButton){
-			currentMode = EXPRESSION_MODE;
-			inputLabel.setText("Expression: ");
-			inputVarBox.setEditable(true);
-			resultLabel.setText("Result: ");
-			xIncrementField.setEditable(false);
-			logArea.setVisible(true);
-			
-			if(accum != null){
-				accum.close();
-				accum = null;
-			}
-			expre = new ExpressionCalculator();
-			//System.out.println("express");
-		}
-		else if(arg0.getSource() == graphButton){
-			currentMode = GRAPHING_MODE;
-			inputLabel.setText("Expression: ");
-			inputVarBox.setEditable(true);
-			resultLabel.setText("Result: ");
-			xIncrementField.setEditable(true);
-			logArea.setVisible(false);
-			//System.out.println("graph");
-		}
+		
+	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		calWindow.dispose();
 	}	
 }
 

@@ -86,10 +86,11 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		// Formatting display area
 		Dimension display_size = new Dimension(650,400);
 		calWindow.setSize(display_size);
+		calWindow.setLocation(300, 300);
 		calWindow.setMinimumSize(display_size);
 		calWindow.setVisible(true);
 		calWindow.setTitle("Expression Calculator");
-		calWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		calWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// Formatting log area
 		logArea.setSize(calWindow.getWidth()-10, 300);
