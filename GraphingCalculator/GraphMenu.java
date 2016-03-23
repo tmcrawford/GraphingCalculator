@@ -5,38 +5,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import BusinessAccumulator.BusinessAccumulator;
 import ExpressionCalculator.ExpressionCalculator;
 
 public class GraphMenu implements ActionListener {
-	private static final int ACCUMULATE_MODE = 0;
-	private static final int EXPRESSION_MODE = 1;
-	private static final int GRAPHING_MODE = 2;
-	
-	private int currentMode = ACCUMULATE_MODE;
 	
 	private JLabel inputLabel = new JLabel("Click on button to open desired function");
 	private JPanel inputPanel = new JPanel();
 	private JRadioButton accumuButton = new JRadioButton("Accumulate");
 	private JRadioButton expressButton = new JRadioButton("Expression");
 	private JRadioButton graphButton = new JRadioButton("Graphing");
-	private JFrame calWindow = new JFrame("Lab 10: Graphing Calculator");
+	private JFrame mainWindow = new JFrame("Lab 10 ECE 310 Project");
 
 	private BusinessAccumulator accum;
 	private ExpressionCalculator expre;
 	private GraphingCalculator grph; 
 	
 	public GraphMenu(){
-		JFrame mainWindow = new JFrame("Lab 10 ECE 310 Project");
 		mainWindow.setSize(new Dimension(400,150));
 		mainWindow.setVisible(true);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,7 +54,6 @@ public class GraphMenu implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == accumuButton ){
-			currentMode = ACCUMULATE_MODE;
 			if(expre != null){
 				expre.close();
 				expre = null;
@@ -76,7 +65,7 @@ public class GraphMenu implements ActionListener {
 			accum = new BusinessAccumulator();
 		}
 		else if(arg0.getSource() == expressButton){
-			currentMode = EXPRESSION_MODE;
+		
 	
 			if(grph != null){
 				grph.close();
@@ -86,11 +75,10 @@ public class GraphMenu implements ActionListener {
 				accum.close();
 				accum = null;
 			}
-			expre = new ExpressionCalculator();
+			expre = new ExpressionCalculator(true);
 			//System.out.println("express");
 		}
 		else if(arg0.getSource() == graphButton){
-			currentMode = GRAPHING_MODE;
 			
 			if(accum != null){
 				accum.close();

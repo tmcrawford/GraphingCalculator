@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import sun.swing.AccumulativeRunnable;
 //ECE 309 Lab 8 - Meagan Raviele, Isaiah Smoak, Timothy Crawford, Rachel Williams
 //WE COMPLETED THE EXTRA CREDIT PORTION OF THE LAB
 public class BusinessAccumulator implements Runnable, ActionListener, KeyListener  {

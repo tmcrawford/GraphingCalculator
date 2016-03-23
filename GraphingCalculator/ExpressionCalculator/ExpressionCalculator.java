@@ -52,68 +52,65 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	public static void main(String[] args) {
 		System.out.println("Lab 9 - Expression Calculation "
 				+ "by Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
-		new ExpressionCalculator();
+		new ExpressionCalculator(true);
 	}
 
-	public ExpressionCalculator() {
+	public ExpressionCalculator(boolean GUI) {
 		// Formatting fonts and colors
-		varLabel.setFont(new Font("default", Font.BOLD, 20));
-		inputBox.setFont(new Font("default", Font.BOLD, 20));
-		inputVarBox.setFont(new Font("default", Font.BOLD, 20));
-		logArea.setFont(new Font("default", Font.BOLD, 20));
-		logArea.setEditable(false);
-		resultBox.setFont(new Font("default", Font.BOLD, 20));
-		resultBox.setEditable(false);
-		resultBox.setBackground(Color.white);
-		errorMessage.setFont(new Font("default", Font.BOLD, 20));
-		errorMessage.setForeground(Color.red); // Errors are labeled red
-		expressLabel.setFont(new Font("default", Font.BOLD, 20));
-		resultLabel.setFont(new Font("default", Font.BOLD, 20));
-
-		// Formatting input box sizes
-		inputVarBox.setPreferredSize(new Dimension(100,30)); // Set fixed size of variable box
-		inputBox.setPreferredSize(new Dimension(350, 30)); // Set fixed size of expression box
-		resultBox.setPreferredSize(new Dimension(150,30));
-		inputPanel.setLayout(new GridBagLayout()); // Set layout of the panel
-		inputPanel.add(expressLabel);
-		inputPanel.add(inputBox);
-
-		// Adding components to the second panel
-		inputPanel2.add(varLabel);
-		inputPanel2.add(inputVarBox);
-		inputPanel2.add(clearButton);
-
-		// Formatting display area
-		Dimension display_size = new Dimension(650,400);
-		calWindow.setSize(display_size);
-		calWindow.setLocation(300, 300);
-		calWindow.setMinimumSize(display_size);
-		calWindow.setVisible(true);
-		calWindow.setTitle("Expression Calculator");
-		calWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		// Formatting log area
-		logArea.setSize(calWindow.getWidth()-10, 300);
-		logPane.setSize(calWindow.getWidth()-10, 300);
-		Dimension preferredSize = new Dimension(calWindow.getWidth()-20,200);
-		logPane.setPreferredSize(preferredSize);
-		logPane.setMaximumSize(preferredSize);
-
-		// Adding components to main panel
-		mainPanel.setSize(calWindow.getWidth(),calWindow.getHeight());
-		mainPanel.setLayout(new FlowLayout());
-		mainPanel.add(inputPanel);
-		mainPanel.add(inputPanel2);
-		mainPanel.add(resultLabel);
-		mainPanel.add(resultBox);
-		mainPanel.add(logPane);
-
-		// Adding main panel to the main window
-		calWindow.getContentPane().add(mainPanel);
-		calWindow.getContentPane().add(errorMessage, "South");
-		inputVarBox.addKeyListener(this);
-		inputBox.addKeyListener(this);
-		clearButton.addActionListener(this);
+		
+		if (GUI) {
+			varLabel.setFont(new Font("default", Font.BOLD, 20));
+			inputBox.setFont(new Font("default", Font.BOLD, 20));
+			inputVarBox.setFont(new Font("default", Font.BOLD, 20));
+			logArea.setFont(new Font("default", Font.BOLD, 20));
+			logArea.setEditable(false);
+			resultBox.setFont(new Font("default", Font.BOLD, 20));
+			resultBox.setEditable(false);
+			resultBox.setBackground(Color.white);
+			errorMessage.setFont(new Font("default", Font.BOLD, 20));
+			errorMessage.setForeground(Color.red); // Errors are labeled red
+			expressLabel.setFont(new Font("default", Font.BOLD, 20));
+			resultLabel.setFont(new Font("default", Font.BOLD, 20));
+			// Formatting input box sizes
+			inputVarBox.setPreferredSize(new Dimension(100, 30)); // Set fixed size of variable box
+			inputBox.setPreferredSize(new Dimension(350, 30)); // Set fixed size of expression box
+			resultBox.setPreferredSize(new Dimension(150, 30));
+			inputPanel.setLayout(new GridBagLayout()); // Set layout of the panel
+			inputPanel.add(expressLabel);
+			inputPanel.add(inputBox);
+			// Adding components to the second panel
+			inputPanel2.add(varLabel);
+			inputPanel2.add(inputVarBox);
+			inputPanel2.add(clearButton);
+			// Formatting display area
+			Dimension display_size = new Dimension(650, 400);
+			calWindow.setSize(display_size);
+			calWindow.setLocation(300, 300);
+			calWindow.setMinimumSize(display_size);
+			calWindow.setVisible(true);
+			calWindow.setTitle("Expression Calculator");
+			calWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			// Formatting log area
+			logArea.setSize(calWindow.getWidth() - 10, 300);
+			logPane.setSize(calWindow.getWidth() - 10, 300);
+			Dimension preferredSize = new Dimension(calWindow.getWidth() - 20, 200);
+			logPane.setPreferredSize(preferredSize);
+			logPane.setMaximumSize(preferredSize);
+			// Adding components to main panel
+			mainPanel.setSize(calWindow.getWidth(), calWindow.getHeight());
+			mainPanel.setLayout(new FlowLayout());
+			mainPanel.add(inputPanel);
+			mainPanel.add(inputPanel2);
+			mainPanel.add(resultLabel);
+			mainPanel.add(resultBox);
+			mainPanel.add(logPane);
+			// Adding main panel to the main window
+			calWindow.getContentPane().add(mainPanel);
+			calWindow.getContentPane().add(errorMessage, "South");
+			inputVarBox.addKeyListener(this);
+			inputBox.addKeyListener(this);
+			clearButton.addActionListener(this);
+		}
 	}
 
 	public void actionPerformed(ActionEvent ae) {

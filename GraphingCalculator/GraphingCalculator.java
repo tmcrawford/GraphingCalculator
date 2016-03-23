@@ -26,10 +26,6 @@ import ExpressionCalculator.ExpressionCalculator;
 
 public class GraphingCalculator implements ActionListener, KeyListener {
 	// hello testing
-	private static final int ACCUMULATE_MODE = 0;
-	private static final int EXPRESSION_MODE = 1;
-	private static final int GRAPHING_MODE = 2;
-	private int currentMode = ACCUMULATE_MODE;
 	String newLine = System.lineSeparator();
 	private JLabel varLabel = new JLabel("X = ");
 	private JTextField inputVarBox = new JTextField();
@@ -47,7 +43,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	private JPanel mainPanel = new JPanel();	
 	private JButton clearButton = new JButton("CLEAR");
 	private JFrame calWindow = new JFrame("Lab 10: Graphing Calculator");
-	private ExpressionCalculator expre;
+	private ExpressionCalculator expre = new ExpressionCalculator(false);
 
 	public GraphingCalculator() {
 		// TODO Auto-generated constructor stub
