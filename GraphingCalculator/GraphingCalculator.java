@@ -126,6 +126,44 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 
 	// =======calculator expression code ===================
 	
+	
+	public void drawGraph(){
+		// Array of x values
+		// Array of y values
+		// GraphPanel
+	}
+	
+	public int xValueToPixels(){
+		//xScreenWidth = getWidth() on JPanel to get width of screen in pixels
+		//xAxisLength = screenSize - left and right margins
+		//xNumValuesToPrint = size of xValue array
+		//xValueToPixelsConversionFactor = xAxisLength / (xValuesToPrint - 1) = pixels to draw the next x scale value to the right
+		//Values on x axis are the SAME as x points to plot
+		int xValueToPixelsConversionFactor;
+		return xValueToPixelsConversionFactor;
+	}
+	
+	public int yValueToPixels(){
+		//Similar to xValueToPixelsConversionFactor
+		//Use the range of provided y values and the length of yaxis to get this value then multiply each provided y value by the conversion factor to get its offset in pixels from the x axis
+		//yScaleValues = values printed to y axis
+		//yPlottingPoints = numbers we need to plot
+		//Values on y axis are NOT the same as y points to plot
+		//CalculateYScaleValues in lab directory
+		int yValueToPixelsConversionFactor;
+		return yValueToPixelsConversionFactor;
+	}
+	
+	public double calculateForGraph(String expression, int xPointInPixels){
+		//Takes expression entered for graph mode and takes xPointInPixels from mousePressed() as arguments
+		//Converts xPointInPixels to actual xValue *new method for this*?
+		//Evaluates expression for given x and returns the yValue
+		double yValue;
+		return yValue;
+	}
+	
+	
+	
 	public void keyPressed(KeyEvent kp) {
 		//check to see what mode is, and switch based off of it. Also add/remove fields
 		if(kp.getKeyCode() == KeyEvent.VK_ENTER) {
