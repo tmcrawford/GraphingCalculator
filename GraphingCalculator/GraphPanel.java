@@ -34,6 +34,9 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     // 4 Calculate x and y pixels-to-value conversion factors (can't do in CTOR!) 	 
     // 5 Do ALL drawing here in paint() 
     // draw x and y scales and the expression graph here.
+    //Use drawOval() to plot pairs of given x,y values as points
+    //Use drawLine() to draw a straight line between successive graphed points to complete the graph
+
     }
 
   public void mousePressed(MouseEvent me) // show tiny x,y values window
