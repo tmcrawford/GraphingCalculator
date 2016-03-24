@@ -26,6 +26,10 @@ public class GraphPanel extends JPanel implements MouseListener {
     // 3 Build the mini displayXYpairWindow (reuse for each mouse click!)
     }
 
+	
+	//========================isExpression()=================================
+	// Description: Determines if an expression exists to be handled returns T/F (boolean)
+	
 @Override
 public void paint(Graphics g) // overrides paint() in JPanel!
     {

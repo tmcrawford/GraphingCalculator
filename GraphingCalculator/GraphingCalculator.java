@@ -115,43 +115,24 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputBox.addKeyListener(this);
 		clearButton.addActionListener(this);
 	}
-
-	public static void main(String[] args) {
-		System.out.println("Hello everyone GitHub is live");
-		System.out.println("");
-		System.out.println("ECE 309 - Lab 10: Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
-		System.out.println("");
-		new GraphingCalculator();
-	}
-
-	// =======calculator expression code ===================
 	
-	
+	//========================isExpression()=================================
+		// Description: graphs the expression
 	public void drawGraph(){
 		// Array of x values
 		// Array of y values
 		// GraphPanel
 	}
 	
-	public int xValueToPixels(){
-		//xScreenWidth = getWidth() on JPanel to get width of screen in pixels
-		//xAxisLength = screenSize - left and right margins
-		//xNumValuesToPrint = size of xValue array
-		//xValueToPixelsConversionFactor = xAxisLength / (xValuesToPrint - 1) = pixels to draw the next x scale value to the right
-		//Values on x axis are the SAME as x points to plot
-		int xValueToPixelsConversionFactor;
-		return xValueToPixelsConversionFactor;
-	}
-	
-	public int yValueToPixels(){
+	public int ValueToPixels(){
 		//Similar to xValueToPixelsConversionFactor
 		//Use the range of provided y values and the length of yaxis to get this value then multiply each provided y value by the conversion factor to get its offset in pixels from the x axis
 		//yScaleValues = values printed to y axis
 		//yPlottingPoints = numbers we need to plot
 		//Values on y axis are NOT the same as y points to plot
 		//CalculateYScaleValues in lab directory
-		int yValueToPixelsConversionFactor;
-		return yValueToPixelsConversionFactor;
+		int ValueToPixelsConversionFactor;
+		return ValueToPixelsConversionFactor;
 	}
 	
 	public double calculateForGraph(String expression, int xPointInPixels){
