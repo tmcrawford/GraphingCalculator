@@ -116,13 +116,13 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		clearButton.addActionListener(this);
 	}
 
-//	public static void main(String[] args) {
-//		System.out.println("Hello everyone GitHub is live");
-//		System.out.println("");
-//		System.out.println("ECE 309 - Lab 10: Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
-//		System.out.println("");
-//		new GraphingCalculator();
-//	}
+	public static void main(String[] args) {
+		System.out.println("Hello everyone GitHub is live");
+		System.out.println("");
+		System.out.println("ECE 309 - Lab 10: Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
+		System.out.println("");
+		new GraphingCalculator();
+	}
 
 	// =======calculator expression code ===================
 	

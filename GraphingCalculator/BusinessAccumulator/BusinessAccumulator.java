@@ -37,14 +37,14 @@ public class BusinessAccumulator implements Runnable, ActionListener, KeyListene
 	double currentAmt; // new amt to be added, type dbl
 	double totalAmt; // total accumulated amt, at each line 
 	
-//	public static void main(String[] args) {
-//		//Meagan Raviele, Isaiah Smoak, Timothy Crawford, Rachel Williams
-//		//WE COMPLETED THE EXTRA CREDIT PORTION OF THE LAB
-//		// loads it in dynamic memory 
-//		System.out.println("ECE 309 Lab 8 - Meagan Raviele, Isaiah Smoak, Rachel Williams, Timothy Crawford");
-//		new BusinessAccumulator(); 
-//		
-//	}
+	public static void main(String[] args) {
+		//Meagan Raviele, Isaiah Smoak, Timothy Crawford, Rachel Williams
+		//WE COMPLETED THE EXTRA CREDIT PORTION OF THE LAB
+		// loads it in dynamic memory 
+		System.out.println("ECE 309 Lab 8 - Meagan Raviele, Isaiah Smoak, Rachel Williams, Timothy Crawford");
+		new BusinessAccumulator(); 
+		
+	}
 	
 	public BusinessAccumulator() {
 		// building the GUI Layout

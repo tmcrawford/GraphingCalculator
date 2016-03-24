@@ -49,11 +49,11 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	public final static double pi = Math.PI;
 	public final static double e =  Math.E;
 
-//	public static void main(String[] args) {
-//		System.out.println("Lab 9 - Expression Calculation "
-//				+ "by Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
-//		new ExpressionCalculator(true);
-//	}
+	public static void main(String[] args) {
+		System.out.println("Lab 9 - Expression Calculation "
+				+ "by Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
+		new ExpressionCalculator(true);
+	}
 
 	public ExpressionCalculator(boolean GUI) {
 		// Formatting fonts and colors
