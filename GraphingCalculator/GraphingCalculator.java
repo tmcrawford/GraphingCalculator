@@ -124,15 +124,26 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		// GraphPanel
 	}
 	
-	public int ValueToPixels(){
+	public int xValueToPixels(){
+		//xScreenWidth = getWidth() on JPanel to get width of screen in pixels
+		double xScreenWidth = GraphPanel.getWidth();
+		//xAxisLength = screenSize - left and right margins
+		//xNumValuesToPrint = size of xValue array
+		//xValueToPixelsConversionFactor = xAxisLength / (xValuesToPrint - 1) = pixels to draw the next x scale value to the right
+		//Values on x axis are the SAME as x points to plot
+		int xValutToPixelsConversionFactor;
+		return xValueToPixelsConversionFactor;
+	}
+	
+	public int yValuesToPixels(){	
 		//Similar to xValueToPixelsConversionFactor
 		//Use the range of provided y values and the length of yaxis to get this value then multiply each provided y value by the conversion factor to get its offset in pixels from the x axis
 		//yScaleValues = values printed to y axis
 		//yPlottingPoints = numbers we need to plot
 		//Values on y axis are NOT the same as y points to plot
 		//CalculateYScaleValues in lab directory
-		int ValueToPixelsConversionFactor;
-		return ValueToPixelsConversionFactor;
+		int yValueToPixelsConversionFactor;
+		return yValueToPixelsConversionFactor;
 	}
 	
 	public double calculateForGraph(String expression, int xPointInPixels){
