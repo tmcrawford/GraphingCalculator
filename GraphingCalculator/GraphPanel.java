@@ -43,6 +43,14 @@ public void paint(Graphics g) // overrides paint() in JPanel!
 
     }
 
+public void findXYPoint(int xPixels, int xValueToPixelsConversionFactor, int yValueToPixelsConversionFactor){
+	//Convert xPixelValue to xValue
+	//Find yValue for corresponding xValue, use calculateForGraph()
+	//Convert yValue to pixels?
+	//Pop window
+
+}
+
   public void mousePressed(MouseEvent me) // show tiny x,y values window
     {
     // xTextField and yTextField are in the mini displayXYpairWindow
