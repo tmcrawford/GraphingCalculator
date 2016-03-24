@@ -25,7 +25,6 @@ import BusinessAccumulator.BusinessAccumulator;
 import ExpressionCalculator.ExpressionCalculator;
 
 public class GraphingCalculator implements ActionListener, KeyListener {
-	// hello testing
 	String newLine = System.lineSeparator();
 	private JLabel varLabel = new JLabel("X = ");
 	private JTextField inputVarBox = new JTextField();
@@ -46,8 +45,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	private ExpressionCalculator expre = new ExpressionCalculator(false);
 
 	public GraphingCalculator() {
-		// TODO Auto-generated constructor stub
-		// Formatting fonts and colors
+		/* Formatting fonts and colors */ 
 		varLabel.setFont(new Font("default", Font.BOLD, 20));
 		inputBox.setFont(new Font("default", Font.BOLD, 20));
 		inputVarBox.setFont(new Font("default", Font.BOLD, 20));
@@ -62,10 +60,9 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputLabel.setFont(new Font("default", Font.BOLD, 20));
 		resultLabel.setFont(new Font("default", Font.BOLD, 20));
 		xIncrementLabel.setFont(new Font("default", Font.BOLD, 20));
-		// Formatting input box sizes
+		
+		/* Formatting input box sizes */
 		inputVarBox.setPreferredSize(new Dimension(100, 30)); // Set fixed size
-		
-		
 		inputBox.setPreferredSize(new Dimension(350, 30)); // Set fixed size of
 		xIncrementField.setPreferredSize(new Dimension(100,30));		// expression box
 		resultBox.setPreferredSize(new Dimension(200, 30));
@@ -74,8 +71,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		//inputPanel.add(inputLabel);
 		//inputPanel.add(inputBox);
 
-		// Adding components to the second panel
-
+		/* Adding components to the second panel */ 
 		inputPanel.add(Box.createRigidArea(new Dimension(100,0)));
 		inputPanel.add(resultLabel);
 		inputPanel.add(resultBox);
@@ -88,7 +84,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputPanel2.add(xIncrementLabel);
 		inputPanel2.add(xIncrementField);
 		
-		// Formatting display area
+		/* Formatting display area */ 
 		Dimension display_size = new Dimension(800, 400);
 		calWindow.setSize(display_size);
 		calWindow.setLocation(300, 300);
@@ -96,14 +92,14 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		calWindow.setVisible(true);
 		calWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		// Formatting log area
+		/* Formatting log area */ 
 		logArea.setSize(calWindow.getWidth() - 10, 100);
 		logPane.setSize(calWindow.getWidth() - 10, 100);
 		Dimension preferredSize = new Dimension(calWindow.getWidth() - 20, 200);
 		logPane.setPreferredSize(preferredSize);
 		logPane.setMaximumSize(preferredSize);
 
-		// Adding components to main panel
+		/* Adding components to main panel */ 
 		mainPanel.setSize(calWindow.getWidth(), calWindow.getHeight());
 		mainPanel.setLayout(new FlowLayout());
 		mainPanel.add(inputPanel);
@@ -112,7 +108,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		//mainPanel.add(resultBox);
 		mainPanel.add(logPane);
 
-		// Adding main panel to the main window
+		/* Adding main panel to the main window */  
 		calWindow.getContentPane().add(mainPanel);
 		calWindow.getContentPane().add(errorMessage, "South");
 		inputVarBox.addKeyListener(this);
@@ -121,17 +117,16 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	}
 
 	public static void main(String[] args) {
-
 		System.out.println("Hello everyone GitHub is live");
-		// TODO Auto-generated method stub
+		System.out.println("");
+		System.out.println("ECE 309 - Lab 10: Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
+		System.out.println("");
 		new GraphingCalculator();
 	}
 
 	// =======calculator expression code ===================
 	
-	@Override
 	public void keyPressed(KeyEvent kp) {
-		// TODO Auto-generated method stub
 		//check to see what mode is, and switch based off of it. Also add/remove fields
 		if(kp.getKeyCode() == KeyEvent.VK_ENTER) {
 			// Clear the message box
@@ -141,26 +136,19 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void close() {
-		// TODO Auto-generated method stub
 		calWindow.dispose();
 	}	
 }
