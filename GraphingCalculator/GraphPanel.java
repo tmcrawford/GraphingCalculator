@@ -29,10 +29,12 @@ public class GraphPanel extends JPanel implements MouseListener {
 	
 
 @Override
+
 public void paint(Graphics g) // overrides paint() in JPanel!
     {
     int windowWidth  = getWidth();  // call methods in JPanel to get the
     int windowHeight = getHeight(); // *CURRENT* size of the window!
+    System.out.println(windowWidth + " and " + windowHeight);
     // 4 Calculate x and y pixels-to-value conversion factors (can't do in CTOR!) 	 
     // 5 Do ALL drawing here in paint() 
     // draw x and y scales and the expression graph here.
