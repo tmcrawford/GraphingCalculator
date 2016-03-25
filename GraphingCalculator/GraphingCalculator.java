@@ -143,7 +143,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	
 
 	
-	public double calculateForGraph(String expression, int xValue) throws Exception{
+	public double calculateForGraph(String expression, double xValue) throws Exception{
  		// Initialize an index to go through expression 
 		int i; 
 
@@ -155,7 +155,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		String holdY;
 
 		// Convert to string to be passed into calculate method
-		holdX = Integer.toString(xValue); 
+		holdX = Double.toString(xValue); 
 
 		// call calculate for expression which returns answer
 		holdY = expre.calculateExpression(expression,holdX);
