@@ -67,20 +67,9 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     	g.drawLine(windowWidth/2 -5, starty, windowWidth/2 + 5, starty);
     	starty+= ticky;
     }
-    // expression = 2x; x-increment by 1
-    /*double xPlottingPoints[]={-4, -3, -2, -1,/ 0, 1, 2, 3, 4}; // xScaleValues
-    double yPlottingPoints[]={-8, -6, -4, -2, 0, 2, 4, 6, 8};
-    double yScaleValues[]={};
-    xValueToPixels(windowWidth);
-    yValueToPixels(windowHeight);
-    // Find yScale values
-    double yMin = yPlottingPoints[0];
-    double yMax = yPlottingPoints[yPlottingPoints.length-1];
-    int yScale = (int)(yMin+yMax)/yPlottingPoints.length;
-    for(int i=0; i<=yPlottingPoints.length; i++){
-    	yScaleValues[i] = yMin+yScale*i;
-    	System.out.println(Double.toString(yScaleValues[i]));
-    }*/
+    
+    getYScaleValues(yValuesCopy);
+
     }
 
 // this method may be unnecessary...taken care of in mousePressed already
@@ -90,6 +79,44 @@ public void findXYPoint(int xPixels, int xValueToPixelsConversionFactor, int yVa
 	//Convert yValue to pixels?
 	//Pop window
 
+}
+
+
+public double[] getYScaleValues(double[] yPlottingPoints){
+	double yScaleValues[]=yPlottingPoints;
+    // Find yMin and yMax
+    double yMin = yPlottingPoints[0];
+    double yMax = yPlottingPoints[0];
+    for(int i=1; i<yPlottingPoints.length; i+=1){
+    	if(yMin>yPlottingPoints[i]){
+    		yMin = yPlottingPoints[i];
+    	}
+    	if(yMax<yPlottingPoints[i]){
+    		yMax = yPlottingPoints[i];
+    	}
+    }
+    System.out.println(Double.toString(yMin));
+    System.out.println(Double.toString(yMax));	    
+    // Find y-axis tic scale values
+    int yNumTicks = 10;
+    double yRange = yMax-yMin;
+    double yTickSize;
+    if (yRange != 0){
+	    double yTickSizeUnrounded = yRange/(yNumTicks-1);
+	    double x = Math.ceil(Math.log10(yTickSizeUnrounded)-1);
+	    double pow10x = Math.pow(10, x);
+	    yTickSize = Math.ceil(yTickSizeUnrounded / pow10x) * pow10x;
+    }
+    else{
+    	yTickSize = yMax/10;
+    	yMin = 0;
+    }
+    System.out.println(Double.toString(yTickSize));   
+    for(int i=0; i<yNumTicks; i+=1){
+    	yScaleValues[i] = yMin+yTickSize*i;
+    	System.out.println(Double.toString(yScaleValues[i]));
+    }
+    return yScaleValues;
 }
 
 public int xValueToPixels(int width){
