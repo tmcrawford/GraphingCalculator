@@ -143,13 +143,27 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	
 
 	
-	public double calculateForGraph(String expression, String xValue){
-		//Takes expression entered for graph mode and takes xPointInPixels from mousePressed() as arguments
-		//Converts xPointInPixels to actual xValue *new method for this*?
-		//Evaluates expression for given x and returns the yValue
-		double yValue;
-		//return yValue;
-		return 0;
+	public double calculateForGraph(String expression, int xValue){
+ 		// Initialize an index to go through expression 
+		int i; 
+
+		// Initialize yValue
+		double yValue; 
+
+		// Placeholders for manipulation 
+		String holdX; 
+		String holdY;
+
+		// Convert to string to be passed into calculate method
+		holdX = Integer.toString(xValue); 
+
+		// call calculate for expression which returns answer
+		holdY = ExpressionCalculator.calculateExpression(expression,holdX);
+
+		// Convert back to int
+		yValue = Double.parseDouble(holdY); 
+
+		return yValue; 
 	}
 	
 	
