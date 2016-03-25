@@ -115,13 +115,12 @@ public class GraphPanel extends JPanel implements MouseListener {
 			yTickSize = yMax/10;
 			yMin = 0;
 		}
-		//here, something happens!
+		
 		System.out.println("This is tickSize: " + Double.toString(yTickSize));   
 		for(int i=0; i<yNumTicks; i+=1){
 			yScaleValues[i] = yMin+yTickSize*i;
 			//System.out.println(Double.toString(yScaleValues[i]));
 		}
-		//here and between
 		
 		return yScaleValues;
 	}
@@ -133,10 +132,10 @@ public class GraphPanel extends JPanel implements MouseListener {
 		xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint - 1);// = pixels to draw the next x scale value to the right
 		return xValueToPixelsConversionFactor;
 	}
-
+//this one needs work
 	public int yValueToPixels(){	
 		int yAxisLength = getHeight() - 2*padding;
-		int yNumValuesToPrint = 10;
+		int yNumValuesToPrint = yValuesCopy.length;
 		yValueToPixelsConversionFactor = yAxisLength / (yNumValuesToPrint - 1);
 		return yValueToPixelsConversionFactor;
 
