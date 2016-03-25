@@ -24,10 +24,12 @@ public class GraphPanel extends JPanel implements MouseListener {
 	private JFrame displayXYpairWindow;
 	private double[] xValuesCopy;
 	private double[] yValuesCopy;
+	private final int padding = 25; //this is padding for all borders
 	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
 	{
 		xValuesCopy = xValues;
 		yValuesCopy = yValues;
+		
 		// To-dos for this constructor method:
 		// 1 call addMouseListener(this); to register this panel as the MouseListener
 		// 2 Calculate Y scale values (and save them) 
@@ -40,36 +42,29 @@ public class GraphPanel extends JPanel implements MouseListener {
 
 	public void paint(Graphics g) // overrides paint() in JPanel!
 	{
-		getRootPane().setBackground(Color.black);
+
+		System.out.println("window size:" + getWidth() + "," + getHeight());
 		int windowWidth  = getWidth();  // call methods in JPanel to get the
 		int windowHeight = getHeight(); // *CURRENT* size of the window!
-		g.setColor(Color.yellow);
-		g.drawLine(25, windowHeight/2, windowWidth - 25, windowHeight/2);
-		g.drawLine(windowWidth/2, 25, windowWidth/2, windowHeight - 25);
-		int tickx = (windowWidth - 50)/10;
-		int startx = 25 + tickx;
+		g.setColor(Color.blue);
+		g.drawLine(padding, windowHeight - padding, windowWidth - padding, windowHeight - padding); //x line
+		g.drawLine(padding, padding, padding, windowHeight - padding); //y line
+		int tickx = (windowWidth - 2*padding)/10;
+		int startx = padding + tickx;
 		for(int i = 0; i < 9; i++){
-			if(i == 4){
-				startx += tickx;
-				continue; //don't draw that hideous tickmark
-			}
-			g.drawLine(startx, windowHeight-25, startx, windowHeight-25);
-			g.drawString(Double.toString(xValuesCopy[i]), startx-7, windowHeight/2 + 20);
+			g.drawLine(startx, windowHeight-padding+5, startx, windowHeight-padding-5);
+			g.drawString(Double.toString(xValuesCopy[i]), startx-7, windowHeight-padding + 20);
 			startx += tickx;
 		}
-		int ticky = (windowHeight-50)/10;
-		int starty = 25 + ticky;
+		int ticky = (windowHeight-2*padding)/10;
+		int starty = padding + ticky;
 		for(int i = 0; i < 9; i++){
-			if(i == 4){
-				starty += ticky;
-				continue; //don't draw that hideous tickmark
-			}
-			g.drawLine(windowWidth/2 -5, starty, windowWidth/2 + 5, starty);
+			g.drawLine(padding -5, starty, padding + 5, starty);
 			starty+= ticky;
 		}
 
 		System.out.println("These are yScaleValues: " + getYScaleValues(yValuesCopy));
-
+		
 	}
 
 	// this method may be unnecessary...taken care of in mousePressed already
@@ -114,20 +109,20 @@ public class GraphPanel extends JPanel implements MouseListener {
 		System.out.println(Double.toString(yTickSize));   
 		for(int i=0; i<yNumTicks; i+=1){
 			yScaleValues[i] = yMin+yTickSize*i;
-			System.out.println(Double.toString(yScaleValues[i]));
+			//System.out.println(Double.toString(yScaleValues[i]));
 		}
 		return yScaleValues;
 	}
 
 	public int xValueToPixels(){
-		int xAxisLength = getWidth() - 50;
+		int xAxisLength = getWidth() - 2*padding;
 		int xNumValuesToPrint = 10;
 		xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint - 1);// = pixels to draw the next x scale value to the right
 		return xValueToPixelsConversionFactor;
 	}
 
 	public int yValueToPixels(){	
-		int yAxisLength = getHeight() - 50;
+		int yAxisLength = getHeight() - 2*padding;
 		int yNumValuesToPrint = 10;
 		yValueToPixelsConversionFactor = yAxisLength / (yNumValuesToPrint - 1);
 		return yValueToPixelsConversionFactor;
