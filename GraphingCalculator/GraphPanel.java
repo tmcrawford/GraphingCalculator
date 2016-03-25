@@ -68,7 +68,7 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     	starty+= ticky;
     }
     
-    getYScaleValues(yValuesCopy);
+    System.out.println(getYScaleValues(yValuesCopy));
 
     }
 
@@ -119,15 +119,15 @@ public double[] getYScaleValues(double[] yPlottingPoints){
     return yScaleValues;
 }
 
-public int xValueToPixels(int width){
-	int xAxisLength = width - 50;
+public int xValueToPixels(){
+	int xAxisLength = getWidth() - 50;
 	int xNumValuesToPrint = 10;
 	xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint - 1);// = pixels to draw the next x scale value to the right
 	return xValueToPixelsConversionFactor;
 }
 
-public int yValueToPixels(int height){	
-	int yAxisLength = height - 50;
+public int yValueToPixels(){	
+	int yAxisLength = getHeight() - 50;
 	int yNumValuesToPrint = 10;
 	yValueToPixelsConversionFactor = yAxisLength / (yNumValuesToPrint - 1);
 	return yValueToPixelsConversionFactor;
