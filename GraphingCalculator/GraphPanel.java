@@ -43,9 +43,23 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     g.drawLine(windowWidth/2, 25, windowWidth/2, windowHeight - 25);
     int tickx = (windowWidth - 50)/10;
     int startx = 25 + tickx;
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 9; i++){
+    	if(i == 4){
+    		startx += tickx;
+    		continue; //don't draw that hideous tickmark
+    	}
     	g.drawLine(startx, windowHeight/2-5, startx, windowHeight/2+5);
     	startx += tickx;
+    }
+    int ticky = (windowHeight-50)/10;
+    int starty = 25 + ticky;
+    for(int i = 0; i < 9; i++){
+    	if(i == 4){
+    		starty += ticky;
+    		continue; //don't draw that hideous tickmark
+    	}
+    	g.drawLine(windowWidth/2 -5, starty, windowWidth/2 + 5, starty);
+    	starty+= ticky;
     }
     //just to do it
     // 4 Calculate x and y pixels-to-value conversion factors (can't do in CTOR!) 	 
