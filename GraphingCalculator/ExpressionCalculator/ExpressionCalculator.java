@@ -194,6 +194,48 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	}
 	//==========================END calculate()==============================
 
+	
+	public String calculateExpression2(String fullExpression, String xVariable) throws Exception {
+
+		// Macro substitution (subbing for x, pi, e, negative unary operators)
+		String localFullExpression = fullExpression;
+		
+		localFullExpression = substitution(localFullExpression);
+
+		String answer = localFullExpression; //can use an if statement...
+		while(isExpression(localFullExpression)){
+
+			// Find highest level expression in parenthesis
+			String currentSimpleExpression = findSimpleExpression(localFullExpression);
+			// Evaluated answer from expression 
+
+			answer = evalSimpleExpression(currentSimpleExpression);
+
+			// Find index of where currentExpression is in localFullExpression
+			int cseIndex = localFullExpression.indexOf(currentSimpleExpression);
+			int cseLength = currentSimpleExpression.length();
+
+			// If its a number only, reformat currentSimpleExpression
+			if(!(answer.contains("^")
+					|| answer.contains("r")
+					|| answer.contains("*")
+					|| answer.contains("/")
+					|| answer.contains("+")
+					|| (answer.contains("-") && !answer.startsWith("-"))
+					) ){
+				// Check to see if there are surrounding ()
+				if(cseIndex!=0 && localFullExpression.charAt(cseIndex-1)=='(' && localFullExpression.charAt(cseIndex+cseLength)==')'){
+					cseIndex = cseIndex-1;
+					cseLength = cseLength+2;
+				}
+			}
+			localFullExpression = localFullExpression.substring(0, cseIndex) + answer + localFullExpression.substring(cseIndex+cseLength);
+		}
+		return answer; 
+	}
+	
+	
+	
 	//========================displayAnswer()=================================
 	// Description: Format and display the final answer in resultBox
 	//Developed by Meagan Raviele

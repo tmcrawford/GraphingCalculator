@@ -161,7 +161,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		// call calculate for expression which returns answer
 		// added check errors (take 2)
 		expre.checkErrors(holdX, expression); 
-		holdY = expre.calculateExpression(expression,holdX);
+		holdY = expre.calculateExpression2(expression,holdX);
 
 		// Convert back to int
 		yValue = Double.parseDouble(holdY); 
