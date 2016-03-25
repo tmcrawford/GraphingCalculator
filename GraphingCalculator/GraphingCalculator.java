@@ -51,7 +51,6 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputVarBox.setFont(new Font("default", Font.BOLD, 20));
 		logArea.setFont(new Font("default", Font.BOLD, 20));
 		logArea.setEditable(false);
-		logArea.setPreferredSize(new Dimension(170, 170));
 		resultBox.setFont(new Font("default", Font.BOLD, 20));
 		resultBox.setEditable(false);
 		resultBox.setBackground(Color.white);
@@ -131,7 +130,9 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		}//TEMPORARY BLOCKED@@@@
 		for(int i = 0; i < yValues.length; i++){
 			yValues[i] = calculateForGraph(expression,xValues[i]);
-			System.out.println("for x: " + xValues[i] + " y is " + yValues[i]);
+			logArea.append(("for x: " + xValues[i] + ", y is " + yValues[i] + newLine));
+			logArea.setCaretPosition(logArea.getDocument().getLength());
+			
 		}
 		
 		JFrame graphWindow = new JFrame("Expression: " + inputBox.getText());
