@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import ExpressionCalculator.ExpressionCalculator;
+import sun.java2d.loops.DrawLine;
 
 
 public class GraphPanel extends JPanel implements MouseListener {
@@ -20,6 +22,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 	private JFrame displayXYpairWindow;
 	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
     {
+		
     // To-dos for this constructor method:
     // 1 call addMouseListener(this); to register this panel as the MouseListener
     // 2 Calculate Y scale values (and save them) 
@@ -32,9 +35,19 @@ public class GraphPanel extends JPanel implements MouseListener {
 
 public void paint(Graphics g) // overrides paint() in JPanel!
     {
+	getRootPane().setBackground(Color.black);
     int windowWidth  = getWidth();  // call methods in JPanel to get the
     int windowHeight = getHeight(); // *CURRENT* size of the window!
-    System.out.println(windowWidth + " and " + windowHeight);
+    g.setColor(Color.yellow);
+    g.drawLine(25, windowHeight/2, windowWidth - 25, windowHeight/2);
+    g.drawLine(windowWidth/2, 25, windowWidth/2, windowHeight - 25);
+    int tickx = (windowWidth - 50)/10;
+    int startx = 25 + tickx;
+    for(int i = 0; i < 10; i++){
+    	g.drawLine(startx, windowHeight/2-5, startx, windowHeight/2+5);
+    	startx += tickx;
+    }
+    //just to do it
     // 4 Calculate x and y pixels-to-value conversion factors (can't do in CTOR!) 	 
     // 5 Do ALL drawing here in paint() 
     // draw x and y scales and the expression graph here.

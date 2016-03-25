@@ -128,11 +128,11 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		for(int i = 0; i < xValues.length; i++){
 			xValues[i] = xbegin+xinc; 
 
-		}
-		for(int i = 0; i < yValues.length; i++){
-			yValues[i] = calculateForGraph(expression,xValues[i]);
-		}
-		JFrame graphWindow = new JFrame(inputVarBox.getText());
+		}//TEMPORARY BLOCKED@@@@
+		//for(int i = 0; i < yValues.length; i++){
+			//yValues[i] = calculateForGraph(expression,xValues[i]);
+		//}
+		JFrame graphWindow = new JFrame("Expression: " + inputBox.getText());
 		graphWindow.setSize(500, 500);
 		graphWindow.setVisible(true);
 		graphWindow.setLocation(400, 100);
@@ -140,6 +140,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		// Array of x values
 		// Array of y values
 		graphWindow.add(new GraphPanel(xValues, yValues));// GraphPanel handles the rest
+		graphWindow.getContentPane().setBackground(Color.black);
 	}
 	
 
