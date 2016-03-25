@@ -22,9 +22,12 @@ public class GraphPanel extends JPanel implements MouseListener {
 	private GraphingCalculator calculator;
 	private JTextField yTextField;
 	private JFrame displayXYpairWindow;
+	private double[] xValuesCopy;
+	private double[] yValuesCopy;
 	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
     {
-		
+		xValuesCopy = xValues;
+		yValuesCopy = yValues;
     // To-dos for this constructor method:
     // 1 call addMouseListener(this); to register this panel as the MouseListener
     // 2 Calculate Y scale values (and save them) 
@@ -51,6 +54,7 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     		continue; //don't draw that hideous tickmark
     	}
     	g.drawLine(startx, windowHeight/2-5, startx, windowHeight/2+5);
+    	g.drawString(Double.toString(xValuesCopy[i]), startx-7, windowHeight/2 + 20);
     	startx += tickx;
     }
     int ticky = (windowHeight-50)/10;
@@ -64,7 +68,7 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     	starty+= ticky;
     }
     // expression = 2x; x-increment by 1
-    /*double xPlottingPoints[]={-4, -3, -2, -1, 0, 1, 2, 3, 4}; // xScaleValues
+    /*double xPlottingPoints[]={-4, -3, -2, -1,/ 0, 1, 2, 3, 4}; // xScaleValues
     double yPlottingPoints[]={-8, -6, -4, -2, 0, 2, 4, 6, 8};
     double yScaleValues[]={};
     xValueToPixels(windowWidth);
