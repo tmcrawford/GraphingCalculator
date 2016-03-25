@@ -149,10 +149,8 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 
 	
 	public double calculateForGraph(String expression, double xValue) throws Exception{
- 		// Initialize an index to go through expression 
-		int i; 
-
-		// Initialize yValue
+ 		// Initialize an index to go through expression 	
+	// Initialize yValue
 		double yValue; 
 
 		// Placeholders for manipulation 
