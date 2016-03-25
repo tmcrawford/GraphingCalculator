@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ExpressionCalculator.ExpressionCalculator;
 import sun.java2d.loops.DrawLine;
 
 
@@ -63,7 +62,9 @@ public class GraphPanel extends JPanel implements MouseListener {
 		int starty = (windowHeight - padding) - ticky;
 		
 		double[] yscle = getYScaleValues(yValuesCopy);
-		
+		for(int i = 0; i < yscle.length; i++){
+			System.out.println(yscle[i]);
+		}
 		for(int i = 0; i < xValuesCopy.length; i++){
 			g.drawLine(padding -5, starty, padding + 5, starty);
 			g.drawString(Double.toString(yscle[i]), 2, starty+5);

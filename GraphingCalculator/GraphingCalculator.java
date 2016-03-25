@@ -21,8 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import BusinessAccumulator.BusinessAccumulator;
-import ExpressionCalculator.ExpressionCalculator;
 
 public class GraphingCalculator implements ActionListener, KeyListener {
 	String newLine = System.lineSeparator();
