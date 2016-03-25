@@ -41,12 +41,36 @@ public void paint(Graphics g) // overrides paint() in JPanel!
 
     }
 
+// this method may be unnecessary...taken care of in mousePressed already
 public void findXYPoint(int xPixels, int xValueToPixelsConversionFactor, int yValueToPixelsConversionFactor){
 	//Convert xPixelValue to xValue
 	//Find yValue for corresponding xValue, use calculateForGraph()
 	//Convert yValue to pixels?
 	//Pop window
 
+}
+
+public int xValueToPixels(){
+	//xScreenWidth = getWidth() on JPanel to get width of screen in pixels
+	//double xScreenWidth = GraphPanel.getWidth();
+	//xAxisLength = screenSize - left and right margins
+	//xNumValuesToPrint = size of xValue array
+	//xValueToPixelsConversionFactor = xAxisLength / (xValuesToPrint - 1) = pixels to draw the next x scale value to the right
+	//Values on x axis are the SAME as x points to plot
+	int xValutToPixelsConversionFactor;
+	//return xValueToPixelsConversionFactor;
+}
+
+public int yValuesToPixels(){	
+	//Similar to xValueToPixelsConversionFactor
+	//Use the range of provided y values and the length of yaxis to get this value then multiply each provided y value by the conversion factor to get its offset in pixels from the x axis
+	//yScaleValues = values printed to y axis
+	//yPlottingPoints = numbers we need to plot
+	//Values on y axis are NOT the same as y points to plot
+	//CalculateYScaleValues in lab directory
+	int yValueToPixelsConversionFactor;
+	//return yValueToPixelsConversionFactor;
+	
 }
 
   public void mousePressed(MouseEvent me) // show tiny x,y values window
