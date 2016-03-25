@@ -24,7 +24,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 	private JFrame displayXYpairWindow;
 	private double[] xValuesCopy;
 	private double[] yValuesCopy;
-	private final int padding = 25; //this is padding for all borders
+	private final int padding = 35; //this is padding for all borders
 	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
 	{
 		xValuesCopy = xValues;
@@ -42,11 +42,11 @@ public class GraphPanel extends JPanel implements MouseListener {
 
 	public void paint(Graphics g) // overrides paint() in JPanel!
 	{
-
+		getRootPane().setBackground(Color.black);
 		System.out.println("window size:" + getWidth() + "," + getHeight());
 		int windowWidth  = getWidth();  // call methods in JPanel to get the
 		int windowHeight = getHeight(); // *CURRENT* size of the window!
-		g.setColor(Color.blue);
+		g.setColor(Color.yellow);
 		g.drawLine(padding, windowHeight - padding, windowWidth - padding, windowHeight - padding); //x line
 		g.drawLine(padding, padding, padding, windowHeight - padding); //y line
 		int tickx = (windowWidth - 2*padding)/10;
@@ -57,14 +57,17 @@ public class GraphPanel extends JPanel implements MouseListener {
 			startx += tickx;
 		}
 		int ticky = (windowHeight-2*padding)/10;
-		int starty = padding + ticky;
+		int starty = (windowHeight - padding) - ticky;
+		double[] yscle = getYScaleValues(yValuesCopy);
 		for(int i = 0; i < 9; i++){
 			g.drawLine(padding -5, starty, padding + 5, starty);
-			starty+= ticky;
+			g.drawString(Double.toString(yscle[i]), 2, starty+5);
+			starty-= ticky;
 		}
-
-		System.out.println("These are yScaleValues: " + getYScaleValues(yValuesCopy));
-		
+		//begin drawing the points. 
+		for(int i = 0; i < xValuesCopy.length; i++){
+		g.drawOval(i*xValueToPixels() + padding, 200, 4, 4);
+		}
 	}
 
 	// this method may be unnecessary...taken care of in mousePressed already
@@ -90,11 +93,12 @@ public class GraphPanel extends JPanel implements MouseListener {
 				yMax = yPlottingPoints[i];
 			}
 		}
+		//got both the min and the max
 		System.out.println(Double.toString(yMin));
 		System.out.println(Double.toString(yMax));	    
 		// Find y-axis tic scale values
 		int yNumTicks = 10;
-		double yRange = yMax-yMin;
+		double yRange = yMax-yMin; //get range
 		double yTickSize;
 		if (yRange != 0){
 			double yTickSizeUnrounded = yRange/(yNumTicks-1);
@@ -106,7 +110,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 			yTickSize = yMax/10;
 			yMin = 0;
 		}
-		System.out.println(Double.toString(yTickSize));   
+		System.out.println("This is tickSize: " + Double.toString(yTickSize));   
 		for(int i=0; i<yNumTicks; i+=1){
 			yScaleValues[i] = yMin+yTickSize*i;
 			//System.out.println(Double.toString(yScaleValues[i]));
