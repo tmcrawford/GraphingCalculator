@@ -146,17 +146,20 @@ public class GraphPanel extends JPanel implements MouseListener {
 	{
 		// xTextField and yTextField are in the mini displayXYpairWindow
 		int xInPixels = me.getX();
+		//doesn't account for padding???
 		double xValue = xInPixels * xPixelsToValueConversionFactor;
+		double yValue = 0;
 		String xValueString = String.valueOf(xValue);
 		xTextField.setText("X = " + xValueString);
 
 		String yValueString = null;
-		try {//won't work
-			yValueString = calculator.calculateForGraph(expression,xValueString);
+		try {
+			yValue = calculator.calculateForGraph(expression,xValue);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		yValueString = String.valueOf(yValue);
 		yTextField.setText("Y = " + yValueString);
 
 		// show mini x,y display window
