@@ -31,11 +31,11 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	private JTextArea logArea = new JTextArea();
 	private JTextField resultBox = new JTextField();
 	private JLabel errorMessage = new JLabel("Errors go here");
-	private JLabel inputLabel = new JLabel("Accumulate: ");
-	private JLabel resultLabel = new JLabel("Total: ");
+	private JLabel inputLabel = new JLabel("Expression: ");
+	private JLabel resultLabel = new JLabel("Result: ");
 	private JTextField inputBox = new JTextField();
 	private JTextField xIncrementField = new JTextField();
-	private JLabel xIncrementLabel = new JLabel("to");
+	private JLabel xIncrementLabel = new JLabel("inc x:");
 	private JPanel inputPanel = new JPanel();
 	private JPanel inputPanel2 = new JPanel();
 	private JScrollPane logPane = new JScrollPane(logArea);
@@ -60,10 +60,10 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputLabel.setFont(new Font("default", Font.BOLD, 20));
 		resultLabel.setFont(new Font("default", Font.BOLD, 20));
 		xIncrementLabel.setFont(new Font("default", Font.BOLD, 20));
-		
+		xIncrementField.setFont(new Font("default", Font.BOLD, 20));
 		/* Formatting input box sizes */
 		inputVarBox.setPreferredSize(new Dimension(100, 30)); // Set fixed size
-		inputBox.setPreferredSize(new Dimension(350, 30)); // Set fixed size of
+		inputBox.setPreferredSize(new Dimension(340, 30)); // Set fixed size of
 		xIncrementField.setPreferredSize(new Dimension(100,30));		// expression box
 		resultBox.setPreferredSize(new Dimension(200, 30));
 		inputPanel.setLayout(new GridBagLayout()); // Set layout of the panel
@@ -114,25 +114,42 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputVarBox.addKeyListener(this);
 		inputBox.addKeyListener(this);
 		clearButton.addActionListener(this);
+		xIncrementField.addKeyListener(this);
 	}
-	
-	//========================isExpression()=================================
-		// Description: graphs the expression
-	public void drawGraph(){
+
+	public void drawGraph() throws Exception{
+		String expression = inputBox.getText(); 
+		inputVarBox.getText();
+		int xbegin = Integer.parseInt(inputVarBox.getText());
+		int xinc = Integer.parseInt(xIncrementField.getText());
+		int size = xbegin + 10; //for 11 values including origin
+		double[] xValues = new double[size]; 
+		double[] yValues = new double [size];
+		for(int i = 0; i < xValues.length; i++){
+			xValues[i] = xbegin+xinc; 
+		}
+		for(int i = 0; i < yValues.length; i++){
+			yValues[i] = calculateForGraph(expression,Double.toString((xValues[i])));
+		}
+		JFrame graphWindow = new JFrame(inputVarBox.getText());
+		graphWindow.setSize(500, 500);
+		graphWindow.setVisible(true);
+		graphWindow.setLocation(400, 100);
+		
 		// Array of x values
 		// Array of y values
-		// GraphPanel
+		graphWindow.add(new GraphPanel(xValues, yValues));// GraphPanel handles the rest
 	}
 	
 	public int xValueToPixels(){
 		//xScreenWidth = getWidth() on JPanel to get width of screen in pixels
-		double xScreenWidth = GraphPanel.getWidth();
+		//double xScreenWidth = GraphPanel.getWidth();
 		//xAxisLength = screenSize - left and right margins
 		//xNumValuesToPrint = size of xValue array
 		//xValueToPixelsConversionFactor = xAxisLength / (xValuesToPrint - 1) = pixels to draw the next x scale value to the right
 		//Values on x axis are the SAME as x points to plot
 		int xValutToPixelsConversionFactor;
-		return xValueToPixelsConversionFactor;
+		//return xValueToPixelsConversionFactor;
 	}
 	
 	public int yValuesToPixels(){	
@@ -143,7 +160,8 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		//Values on y axis are NOT the same as y points to plot
 		//CalculateYScaleValues in lab directory
 		int yValueToPixelsConversionFactor;
-		return yValueToPixelsConversionFactor;
+		//return yValueToPixelsConversionFactor;
+		
 	}
 	
 	public double calculateForGraph(String expression, String xValue){
@@ -151,7 +169,8 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		//Converts xPointInPixels to actual xValue *new method for this*?
 		//Evaluates expression for given x and returns the yValue
 		double yValue;
-		return yValue;
+		//return yValue;
+		return 0;
 	}
 	
 	
@@ -161,7 +180,11 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		if(kp.getKeyCode() == KeyEvent.VK_ENTER) {
 			// Clear the message box
 			errorMessage.setText("");
-			
+			try {
+				drawGraph();
+			} catch (Exception e) {
+				errorMessage.setText(e.getMessage());
+			}
 			
 		}
 	}

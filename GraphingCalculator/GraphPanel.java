@@ -27,9 +27,7 @@ public class GraphPanel extends JPanel implements MouseListener {
     }
 
 	
-	//========================isExpression()=================================
-	// Description: Determines if an expression exists to be handled returns T/F (boolean)
-	
+
 @Override
 public void paint(Graphics g) // overrides paint() in JPanel!
     {
