@@ -196,15 +196,11 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 
 	
 	public String calculateExpression2(String fullExpression, String xVariable) throws Exception {
-
 		// Macro substitution (subbing for x, pi, e, negative unary operators)
 		String localFullExpression = fullExpression;
-		
-		localFullExpression = substitution(localFullExpression);
-
+		localFullExpression = substitution(localFullExpression, xVariable);
 		String answer = localFullExpression; //can use an if statement...
 		while(isExpression(localFullExpression)){
-
 			// Find highest level expression in parenthesis
 			String currentSimpleExpression = findSimpleExpression(localFullExpression);
 			// Evaluated answer from expression 
@@ -236,6 +232,17 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	
 	
 	
+	private String substitution(String expression, String xVariable) {
+
+		expression = expression.replaceAll("X",xVariable);
+		expression = expression.replaceAll("x", xVariable);
+		expression = expression.replaceAll("--", "+");
+		expression = expression.replaceAll("pi", Double.toString(Math.PI));
+		expression = expression.replaceAll("e", Double.toString(Math.E));
+		return expression;
+
+	}
+
 	//========================displayAnswer()=================================
 	// Description: Format and display the final answer in resultBox
 	//Developed by Meagan Raviele
@@ -534,11 +541,13 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	//              Replaces double negatives
 	// Developed by Meagan Raviele
 	private String substitution(String expression) {
+		System.out.println("got here2xx");
 		expression = expression.replaceAll("X",xVariable);
 		expression = expression.replaceAll("x", xVariable);
 		expression = expression.replaceAll("--", "+");
 		expression = expression.replaceAll("pi", Double.toString(Math.PI));
 		expression = expression.replaceAll("e", Double.toString(Math.E));
+		System.out.println("got herefinally");
 		return expression;
 	}
 	//==========================END subsitution()========================================

@@ -126,12 +126,14 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		double[] xValues = new double[size]; 
 		double[] yValues = new double [size];
 		for(int i = 0; i < xValues.length; i++){
-			xValues[i] = xbegin+xinc; 
+			xValues[i] = xbegin+(xinc*i); 
 
 		}//TEMPORARY BLOCKED@@@@
-		//for(int i = 0; i < yValues.length; i++){
-			//yValues[i] = calculateForGraph(expression,xValues[i]);
-		//}
+		for(int i = 0; i < yValues.length; i++){
+			yValues[i] = calculateForGraph(expression,xValues[i]);
+			System.out.println("for x: " + xValues[i] + " y is " + yValues[i]);
+		}
+		
 		JFrame graphWindow = new JFrame("Expression: " + inputBox.getText());
 		graphWindow.setSize(500, 500);
 		graphWindow.setVisible(true);
