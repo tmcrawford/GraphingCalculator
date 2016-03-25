@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -42,7 +43,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 
 	public void paint(Graphics g) // overrides paint() in JPanel!
 	{
-		
+		Point[] pointarray = new Point[xValuesCopy.length];
 		getRootPane().setBackground(Color.black);
 		System.out.println("===================================");
 		System.out.println("window size:" + getWidth() + "," + getHeight());
@@ -63,15 +64,19 @@ public class GraphPanel extends JPanel implements MouseListener {
 		
 		double[] yscle = getYScaleValues(yValuesCopy);
 		
-		for(int i = 0; i < xValuesCopy.length-1; i++){
+		for(int i = 0; i < xValuesCopy.length; i++){
 			g.drawLine(padding -5, starty, padding + 5, starty);
 			g.drawString(Double.toString(yscle[i]), 2, starty+5);
 			starty-= ticky;
 		}
 		//begin drawing the points. 
 		for(int i = 0; i < xValuesCopy.length-1; i++){
-		g.drawOval(i*xValueToPixels() + padding+xValueToPixels(), 200, 4, 4);
+			pointarray[i] = new Point(i*xValueToPixels() + padding+xValueToPixels(), 200);
+			g.drawOval(pointarray[i].x, pointarray[i].y, 4, 4);
 		}
+		//draw lines connecting the points.
+		for(int i = 0; i < xValuesCopy.length-2; i++)
+			g.drawLine(pointarray[i].x, pointarray[i].y+2, pointarray[i+1].x, pointarray[i+1].y+2);
 	}
 
 	// this method may be unnecessary...taken care of in mousePressed already
@@ -102,7 +107,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 		System.out.println(Double.toString(yMin));
 		System.out.println(Double.toString(yMax));	    
 		// Find y-axis tic scale values
-		int yNumTicks = 10;
+		int yNumTicks = yValuesCopy.length;
 		double yRange = yMax-yMin; //get range
 		double yTickSize;
 		if (yRange != 0){
@@ -112,7 +117,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 			yTickSize = Math.ceil(yTickSizeUnrounded / pow10x) * pow10x;
 		}
 		else{
-			yTickSize = yMax/10;
+			yTickSize = yMax/yValuesCopy.length;
 			yMin = 0;
 		}
 		
