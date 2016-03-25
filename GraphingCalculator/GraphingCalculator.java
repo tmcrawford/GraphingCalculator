@@ -146,7 +146,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		return yValueToPixelsConversionFactor;
 	}
 	
-	public double calculateForGraph(String expression, int xPointInPixels){
+	public double calculateForGraph(String expression, String xValue){
 		//Takes expression entered for graph mode and takes xPointInPixels from mousePressed() as arguments
 		//Converts xPointInPixels to actual xValue *new method for this*?
 		//Evaluates expression for given x and returns the yValue

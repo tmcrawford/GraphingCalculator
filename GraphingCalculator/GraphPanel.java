@@ -15,7 +15,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 	private int xPixelsToValueConversionFactor;
 	private JTextField xTextField;
 	private String expression;
-	private ExpressionCalculator calculator;
+	private GraphingCalculator calculator;
 	private JTextField yTextField;
 	private JFrame displayXYpairWindow;
 	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
@@ -61,7 +61,7 @@ public void findXYPoint(int xPixels, int xValueToPixelsConversionFactor, int yVa
   
     String yValueString = null;
 	try {
-		yValueString = calculator.calculateExpression(expression,xValueString);
+		yValueString = calculator.calculateForGraph(expression,xValueString);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
