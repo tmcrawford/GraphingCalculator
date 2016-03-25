@@ -69,8 +69,8 @@ public class GraphPanel extends JPanel implements MouseListener {
 			starty-= ticky;
 		}
 		//begin drawing the points. 
-		for(int i = 0; i < xValuesCopy.length; i++){
-		g.drawOval(i*xValueToPixels() + padding, 200, 4, 4);
+		for(int i = 0; i < xValuesCopy.length-1; i++){
+		g.drawOval(i*xValueToPixels() + padding+xValueToPixels(), 200, 4, 4);
 		}
 	}
 
@@ -127,8 +127,9 @@ public class GraphPanel extends JPanel implements MouseListener {
 	}
 
 	public int xValueToPixels(){
+		
 		int xAxisLength = getWidth() - 2*padding;
-		int xNumValuesToPrint = 10;
+		int xNumValuesToPrint = xValuesCopy.length;
 		xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint - 1);// = pixels to draw the next x scale value to the right
 		return xValueToPixelsConversionFactor;
 	}
@@ -150,7 +151,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 		xTextField.setText("X = " + xValueString);
 
 		String yValueString = null;
-		try {
+		try {//won't work
 			yValueString = calculator.calculateForGraph(expression,xValueString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
