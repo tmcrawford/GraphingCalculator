@@ -198,7 +198,13 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		
+		if(arg0.getSource() == clearButton){
+			logArea.setText("");
+			errorMessage.setText("");
+			xIncrementField.setText("");
+			inputVarBox.setText("");
+			inputBox.setText("");
+		}
 	}
 
 	public void close() {
