@@ -147,7 +147,7 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		}
 	}
 
-	//==========================calculate()=======================================
+	//==========================calculateExpression()=======================================
 	// Description : Continue calculating one simple expression until error occurs
 	// Developed  by Isaiah Smoak
 	public String calculateExpression(String fullExpression, String xVariable) throws Exception {
@@ -505,7 +505,7 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	// Description: Make sure inputVarBox is a number or is empty
 	//              Make sure nothing obvious is wrong with expression
 	// Developed by Isaiah Smoak
-	private void checkErrors() throws Exception{
+	public void checkErrors() throws Exception{
 		// Checking if inputVarBox is number/or empty
 		xVariable = xVariable.trim();
 		fullExpression = fullExpression.trim();
@@ -592,6 +592,98 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		checkParenthesis(fullExpression);			
 	}  
 	//==========================END checkErrors()===============================
+	
+	//========================checkErrors()==============================================
+		// Description: Make sure inputVarBox is a number or is empty
+		//              Make sure nothing obvious is wrong with expression
+		// Developed by Isaiah Smoak
+		public void checkErrors(String xVariable, String fullExpression) throws Exception{
+			// Checking if inputVarBox is number/or empty
+			xVariable = xVariable.trim();
+			fullExpression = fullExpression.trim();
+			
+			try{
+				// If x isn't a number, throw an number format exception
+				Double.parseDouble(xVariable); 
+			}
+			catch(NumberFormatException e){
+				// For empty string check to see if X has value
+				if(e.getMessage().equalsIgnoreCase("empty String")){ 
+					for(int i = 0; i< fullExpression.length(); i++){
+						if(fullExpression.charAt(i) == 'x')
+							throw new IllegalArgumentException("Variable X exists but without a value");
+					} 
+				}
+				else // If there is an exception and not empty string, it isn't a number
+					throw new IllegalArgumentException("Value of X is not a number!");
+			} 
+
+			/* Full expression*/
+			if(fullExpression.length() == 0) throw new IllegalArgumentException("No expression is given!");
+			boolean number1found = false;
+			boolean number2found = false;
+			boolean spacefound = false;
+			boolean operator = false;
+			for(int i = 0; i < fullExpression.length(); i++){
+				if(fullExpression.charAt(i) == '0' || fullExpression.charAt(i) == '1' || fullExpression.charAt(i) == '2' || fullExpression.charAt(i) == '3' || fullExpression.charAt(i) == '4' || fullExpression.charAt(i) == '5' || fullExpression.charAt(i) == '6' ||fullExpression.charAt(i) == '7' ||fullExpression.charAt(i) == '8' ||fullExpression.charAt(i) == '9')
+					number1found = true;
+				if(number1found && isOperator(fullExpression.charAt(i)))
+					operator = true;
+				if(number1found) 
+					if(fullExpression.charAt(i) == ' ')
+						spacefound = true;
+				if(number1found && number2found && operator)
+				{
+					number1found = false; number2found = false; spacefound = false; operator = false;
+				}
+				if(number1found && spacefound && !operator)
+					if(fullExpression.charAt(i) == '0' || fullExpression.charAt(i) == '1' || fullExpression.charAt(i) == '2' || fullExpression.charAt(i) == '3' || fullExpression.charAt(i) == '4' || fullExpression.charAt(i) == '5' || fullExpression.charAt(i) == '6' ||fullExpression.charAt(i) == '7' ||fullExpression.charAt(i) == '8' ||fullExpression.charAt(i) == '9')
+						number2found = true;
+				
+			}
+			if(number1found && spacefound && number2found)
+				throw new IllegalArgumentException("Invalid Expression! Atleast one number with missing operator");
+			// Parse through fullExpression
+			for(int i = 0; i < fullExpression.length(); i++){
+
+				// See if implicit parenthesis is here
+				if(fullExpression.charAt(i) == '(') //was parenthesis here
+					if(i > 0)
+						if(fullExpression.charAt(i-1) != 'r' && fullExpression.charAt(i-1) != '^' && fullExpression.charAt(i-1) != '+' && fullExpression.charAt(i-1) != '-' && fullExpression.charAt(i-1) != '*' && fullExpression.charAt(i-1) != '/' && fullExpression.charAt(i-1) != '(')
+							throw new IllegalArgumentException("Implicit Parenthesis at location " + i);
+						else if(fullExpression.charAt(i) == (')'))
+						{
+							if(i < fullExpression.length())
+								if(fullExpression.charAt(i+1) != 'r' && fullExpression.charAt(i+1) != '^' && fullExpression.charAt(i+1) != '+' && fullExpression.charAt(i+1) != '-' && fullExpression.charAt(i+1) != '*' && fullExpression.charAt(i+1) != '/' && fullExpression.charAt(i+1) != '(')
+								{
+
+									throw new IllegalArgumentException("Implicit Parenthesis at location " + i);
+								}
+						}
+				
+				if(!isLegal(fullExpression.charAt(i))){
+					/* Look for pi or e if not "legal" */
+					if(fullExpression.charAt(i) == 'p'){
+						if(fullExpression.charAt(i+1) == 'i') continue;
+						else
+							throw new IllegalArgumentException("Invalid symbol beginning with "+ fullExpression.charAt(i) + " at location " + Integer.toString(i));
+					}
+					else if(fullExpression.charAt(i) == 'i' ){
+						if(fullExpression.charAt(i-1) == 'p' ) continue;
+						else
+							throw new IllegalArgumentException("Invalid symbol beginning with "+ fullExpression.charAt(i) + " at location " + Integer.toString(i));
+					}
+					else if(fullExpression.charAt(i) == 'e'){ // Look for pi or E
+						continue; // Not truly illegal, pass
+					}
+					else
+						throw new IllegalArgumentException("Invalid symbol beginning with "+ fullExpression.charAt(i) + " at location " + Integer.toString(i));
+				}
+			}
+			// Lastly, handle parenthesis in expression
+			checkParenthesis(fullExpression);			
+		}  
+		//==========================END checkErrors()===============================
 
 	//========================checkParenthesis()================================
 	// Description: Checks for proper format of parenthesis
