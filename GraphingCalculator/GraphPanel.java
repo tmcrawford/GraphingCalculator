@@ -15,6 +15,8 @@ import sun.java2d.loops.DrawLine;
 public class GraphPanel extends JPanel implements MouseListener {
 	
 	private int xPixelsToValueConversionFactor;
+	private int xValueToPixelsConversionFactor;
+	private int yValueToPixelsConversionFactor;
 	private JTextField xTextField;
 	private String expression;
 	private GraphingCalculator calculator;
@@ -61,13 +63,20 @@ public void paint(Graphics g) // overrides paint() in JPanel!
     	g.drawLine(windowWidth/2 -5, starty, windowWidth/2 + 5, starty);
     	starty+= ticky;
     }
-    //just to do it
-    // 4 Calculate x and y pixels-to-value conversion factors (can't do in CTOR!) 	 
-    // 5 Do ALL drawing here in paint() 
-    // draw x and y scales and the expression graph here.
-    //Use drawOval() to plot pairs of given x,y values as points
-    //Use drawLine() to draw a straight line between successive graphed points to complete the graph
-
+    // expression = 2x; x-increment by 1
+    /*double xPlottingPoints[]={-4, -3, -2, -1, 0, 1, 2, 3, 4}; // xScaleValues
+    double yPlottingPoints[]={-8, -6, -4, -2, 0, 2, 4, 6, 8};
+    double yScaleValues[]={};
+    xValueToPixels(windowWidth);
+    yValueToPixels(windowHeight);
+    // Find yScale values
+    double yMin = yPlottingPoints[0];
+    double yMax = yPlottingPoints[yPlottingPoints.length-1];
+    int yScale = (int)(yMin+yMax)/yPlottingPoints.length;
+    for(int i=0; i<=yPlottingPoints.length; i++){
+    	yScaleValues[i] = yMin+yScale*i;
+    	System.out.println(Double.toString(yScaleValues[i]));
+    }*/
     }
 
 // this method may be unnecessary...taken care of in mousePressed already
@@ -79,26 +88,18 @@ public void findXYPoint(int xPixels, int xValueToPixelsConversionFactor, int yVa
 
 }
 
-public int xValueToPixels(){
-	//xScreenWidth = getWidth() on JPanel to get width of screen in pixels
-	//double xScreenWidth = GraphPanel.getWidth();
-	//xAxisLength = screenSize - left and right margins
-	//xNumValuesToPrint = size of xValue array
-	//xValueToPixelsConversionFactor = xAxisLength / (xValuesToPrint - 1) = pixels to draw the next x scale value to the right
-	//Values on x axis are the SAME as x points to plot
-	int xValutToPixelsConversionFactor;
-	//return xValueToPixelsConversionFactor;
+public int xValueToPixels(int width){
+	int xAxisLength = width - 50;
+	int xNumValuesToPrint = 10;
+	xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint - 1);// = pixels to draw the next x scale value to the right
+	return xValueToPixelsConversionFactor;
 }
 
-public int yValuesToPixels(){	
-	//Similar to xValueToPixelsConversionFactor
-	//Use the range of provided y values and the length of yaxis to get this value then multiply each provided y value by the conversion factor to get its offset in pixels from the x axis
-	//yScaleValues = values printed to y axis
-	//yPlottingPoints = numbers we need to plot
-	//Values on y axis are NOT the same as y points to plot
-	//CalculateYScaleValues in lab directory
-	int yValueToPixelsConversionFactor;
-	//return yValueToPixelsConversionFactor;
+public int yValueToPixels(int height){	
+	int yAxisLength = height - 50;
+	int yNumValuesToPrint = 10;
+	yValueToPixelsConversionFactor = yAxisLength / (yNumValuesToPrint - 1);
+	return yValueToPixelsConversionFactor;
 	
 }
 
