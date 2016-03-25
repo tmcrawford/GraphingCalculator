@@ -122,14 +122,15 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		inputVarBox.getText();
 		int xbegin = Integer.parseInt(inputVarBox.getText());
 		int xinc = Integer.parseInt(xIncrementField.getText());
-		int size = xbegin + 10; //for 11 values including origin
+		int size = 11; //for 11 values including origin
 		double[] xValues = new double[size]; 
 		double[] yValues = new double [size];
 		for(int i = 0; i < xValues.length; i++){
 			xValues[i] = xbegin+xinc; 
+
 		}
 		for(int i = 0; i < yValues.length; i++){
-			yValues[i] = calculateForGraph(expression,Double.toString((xValues[i])));
+			yValues[i] = calculateForGraph(expression,xValues[i]);
 		}
 		JFrame graphWindow = new JFrame(inputVarBox.getText());
 		graphWindow.setSize(500, 500);
