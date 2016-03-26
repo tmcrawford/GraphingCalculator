@@ -59,27 +59,40 @@ public class GraphPanel extends JPanel implements MouseListener {
 			startx += tickx;
 		}
 		int ticky = (windowHeight-2*padding)/xValuesCopy.length;
+		System.out.println("This is ticky:" + ticky);
 		int starty = (windowHeight - padding) - ticky;
 		
 		double[] yscle = getYScaleValues(yValuesCopy);
 		for(int i = 0; i < yscle.length; i++){
 			System.out.println(yscle[i]);
 		}
+		double maxY = yscle[yscle.length-1]; //get upmost value
+		double miny = yscle[0]; //get least value
+		double pixTotal = (ticky*(xValuesCopy.length-1));
+		double conversionFactor = pixTotal/(maxY-miny);
 		for(int i = 0; i < xValuesCopy.length; i++){
 			g.drawLine(padding -5, starty, padding + 5, starty);
+			//System.out.println("at this " + i + " you get " + starty);
 			g.drawString(Double.toString(yscle[i]), 2, starty+5);
 			starty-= ticky;
 		}
 		//begin drawing the points. 
-		for(int i = 0; i < xValuesCopy.length-1; i++){
-			int yPoint= (int)yValuesCopy[i];
-			pointarray[i] = new Point(i*xValueToPixels() + padding+xValueToPixels(), windowHeight-padding-20-(int)yPoint*yValueToPixels());
+		//44 <= how to get?
+		//ticky is 10??? 
+		int startposy = padding+ticky; //where it begins, temp!
+		System.out.println(ticky + "this is ticky!");
+		startposy = (windowHeight-padding)-2*ticky - ((xValuesCopy.length-1)*ticky);
+		startposy = 44;
+		for(int i = 0; i < xValuesCopy.length; i++){
+			System.out.println("maxY: " + maxY + "yValue: " + yValuesCopy[i]);
+			int yPoint= (int)(Math.abs(maxY-yValuesCopy[i])*conversionFactor +startposy);
+			pointarray[i] = new Point(i*xValueToPixels() + padding+xValueToPixels(), yPoint);
 			//g.drawOval(pointarray[i].x, pointarray[i].y, 4, 4);
 			g.drawOval(pointarray[i].x, pointarray[i].y, 4, 4);
 
 		}
 		//draw lines connecting the points.
-		for(int i = 0; i < xValuesCopy.length-2; i++)
+		for(int i = 0; i < xValuesCopy.length-1; i++)
 			g.drawLine(pointarray[i].x, pointarray[i].y+2, pointarray[i+1].x, pointarray[i+1].y+2);
 			//g.drawLine(i*xValueToPixels() + padding+xValueToPixels(), windowHeight-padding-20-(int)yValuesCopy[i]*yValueToPixels(), (i+1)*xValueToPixels() + padding+xValueToPixels(), windowHeight-padding-20-(int)yValuesCopy[i+1]*yValueToPixels());
 
@@ -140,14 +153,14 @@ public class GraphPanel extends JPanel implements MouseListener {
 		
 		int xAxisLength = getWidth() - 2*padding;
 		int xNumValuesToPrint = xValuesCopy.length;
-		xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint - 1);// = pixels to draw the next x scale value to the right
+		xValueToPixelsConversionFactor = xAxisLength / (xNumValuesToPrint);// = pixels to draw the next x scale value to the right
 		return xValueToPixelsConversionFactor;
 	}
 //this one needs work
 	public int yValueToPixels(){	
 		int yAxisLength = getHeight() - 2*padding;
 		int yNumValuesToPrint = yValuesCopy.length;
-		yValueToPixelsConversionFactor = yAxisLength / (yNumValuesToPrint - 1);
+		yValueToPixelsConversionFactor = yAxisLength / (yNumValuesToPrint );
 		return yValueToPixelsConversionFactor;
 
 	}
