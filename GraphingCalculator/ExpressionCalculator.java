@@ -579,6 +579,20 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 
 		/* Full expression*/
 		if(fullExpression.length() == 0) throw new IllegalArgumentException("No expression is given!");
+	
+		int begin = 0;
+		while((begin = fullExpression.indexOf('x', begin)) != -1){
+
+			if(begin!= 0 && isNum(fullExpression.charAt(begin-1)))
+				throw new IllegalArgumentException("no operator between x!");
+			if(begin != fullExpression.length()-1 && isNum(fullExpression.charAt(begin+1)))
+				throw new IllegalArgumentException("no operator between x!");
+			System.out.println(begin);
+			begin++; 
+			if(begin >= fullExpression.length()-1)
+				break;
+		}
+		
 		boolean number1found = false;
 		boolean number2found = false;
 		boolean spacefound = false;
@@ -671,6 +685,19 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 
 			/* Full expression*/
 			if(fullExpression.length() == 0) throw new IllegalArgumentException("No expression is given!");
+
+			int begin = 0;
+			while((begin = fullExpression.indexOf('x', begin)) != -1){
+
+				if(begin!= 0 && isNum(fullExpression.charAt(begin-1)))
+					throw new IllegalArgumentException("no operator between x!");
+				if(begin != fullExpression.length()-1 && isNum(fullExpression.charAt(begin+1)))
+					throw new IllegalArgumentException("no operator between x!");
+				System.out.println(begin);
+				begin++; 
+				if(begin >= fullExpression.length()-1)
+					break;
+			}
 			boolean number1found = false;
 			boolean number2found = false;
 			boolean spacefound = false;
@@ -734,6 +761,26 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			// Lastly, handle parenthesis in expression
 			checkParenthesis(fullExpression);			
 		}  
+		private boolean isNum(char charAt) {
+			switch(charAt){
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case 'e':
+			case 'i':
+			case 'p':
+				return true;
+			}
+		return false;
+	}
+
 		//==========================END checkErrors()===============================
 
 	//========================checkParenthesis()================================
