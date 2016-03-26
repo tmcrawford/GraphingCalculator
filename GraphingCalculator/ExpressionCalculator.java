@@ -776,6 +776,7 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			case 'e':
 			case 'i':
 			case 'p':
+			case 'x':
 				return true;
 			}
 		return false;
