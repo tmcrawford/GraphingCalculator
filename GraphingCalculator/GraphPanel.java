@@ -180,7 +180,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 		double yValue = 0;
 		String xValueString = String.valueOf(xValue);
 		System.out.println("clicked x="+xValueString);
-		xTextField.setText("Y = " + xValueString);
+		xTextField.setText("X = " + xValueString);
 		try {
 			yValue = graphExpre.calculateForGraph(expression,xValue);
 			String yValueString = String.valueOf(yValue);
