@@ -14,24 +14,26 @@ import sun.java2d.loops.DrawLine;
 
 public class GraphPanel extends JPanel implements MouseListener {
 	
-	private int xPixelsToValueConversionFactor;
 	private int xValueToPixelsConversionFactor;
 	private int yValueToPixelsConversionFactor;
-	private JTextField xTextField;
 	private String expression;
-	private GraphingCalculator calculator;
-	private JTextField yTextField;
-	private JFrame displayXYpairWindow;
+	private JTextField xTextField = new JTextField();
+	private JTextField yTextField = new JTextField();
+	private JFrame displayXYpairWindow = new JFrame("XY Pair");
+	private JPanel xyPanel  = new JPanel();
+	
 	private double[] xValuesCopy;
 	private double[] yValuesCopy;
 	private GraphingCalculator graphExpre;
 	private final int padding = 35; //this is padding for all borders
-	public GraphPanel (double[] xValues, double[] yValues, GraphingCalculator graphExpress) throws IllegalArgumentException
+	public GraphPanel (double[] xValues, double[] yValues, GraphingCalculator graphExpress, String enteredExpression) throws IllegalArgumentException
 	{
 		graphExpre = graphExpress;
 		xValuesCopy = xValues;
 		yValuesCopy = yValues;
+		expression = enteredExpression;
 		addMouseListener(this);
+		
 		// To-dos for this constructor method:
 		// 1 call addMouseListener(this); to register this panel as the MouseListener
 		// 2 Calculate Y scale values (and save them) 
@@ -169,38 +171,40 @@ public class GraphPanel extends JPanel implements MouseListener {
 
 	public void mousePressed(MouseEvent me) // show tiny x,y values window
 	{
-		// xTextField and yTextField are in the mini displayXYpairWindow
 		int xInPixels = me.getX();
 		System.out.println("clicked ("+me.getX()+","+me.getY()+")");
 		//doesn't account for padding???
-		double xValue = xInPixels / xValueToPixels();
+		int tickMark = (int)(xInPixels/xValueToPixels())-1;
+		System.out.println("tick mark:"+tickMark);
+		double xValue = xValuesCopy[tickMark]; 
 		double yValue = 0;
 		String xValueString = String.valueOf(xValue);
 		System.out.println("clicked x="+xValueString);
-		//xTextField.setText("X = " + xValueString);
+		xTextField.setText("Y = " + xValueString);
 		try {
 			yValue = graphExpre.calculateForGraph(expression,xValue);
 			String yValueString = String.valueOf(yValue);
 			System.out.println("clicked y="+yValueString);
-			//yTextField.setText("Y = " + yValueString);
+			yTextField.setText("Y = " + yValueString);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			System.out.println("exception");
 			e1.printStackTrace();
 		}
 
-		// show mini x,y display window
-		//displayXYpairWindow.add(xTextField);
-		//displayXYpairWindow.add(yTextField);
-		//displayXYpairWindow.setLocation(me.getX(), me.getY());
-		//displayXYpairWindow.setSize(50, 50);
-		//displayXYpairWindow.setVisible(true); 
+		// show mini x,y display window //FIX
+		displayXYpairWindow.getContentPane().add(xyPanel, "Center");
+		xyPanel.add(xTextField,"North");
+		xyPanel.add(yTextField,"South");
+		displayXYpairWindow.setSize(150, 75);
+		displayXYpairWindow.setLocation(me.getXOnScreen(), me.getYOnScreen());
+		displayXYpairWindow.setVisible(true); 
 	}
 
 	public void mouseReleased(MouseEvent me) // hide tiny window
 	{
 		// "erase" mini x,y display window	
-		//displayXYpairWindow.setVisible(false);
+		displayXYpairWindow.setVisible(false);
 	}
 
 	public void mouseClicked(MouseEvent me){} // take no action
