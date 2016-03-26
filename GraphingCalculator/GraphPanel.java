@@ -72,12 +72,17 @@ public class GraphPanel extends JPanel implements MouseListener {
 		}
 		//begin drawing the points. 
 		for(int i = 0; i < xValuesCopy.length-1; i++){
-			pointarray[i] = new Point(i*xValueToPixels() + padding+xValueToPixels(), 200);
-			g.drawOval(pointarray[i].x, pointarray[i].y, 4, 4);
+			//pointarray[i] = new Point(i*xValueToPixels() + padding+xValueToPixels(), 200);
+			//g.drawOval(pointarray[i].x, pointarray[i].y, 4, 4);
+			int yPoint= (int)yValuesCopy[i];
+			g.drawOval(i*xValueToPixels() + padding+xValueToPixels(), windowHeight-padding-20-(int)yPoint*yValueToPixels(), 4, 4);
+
 		}
 		//draw lines connecting the points.
 		for(int i = 0; i < xValuesCopy.length-2; i++)
-			g.drawLine(pointarray[i].x, pointarray[i].y+2, pointarray[i+1].x, pointarray[i+1].y+2);
+			//g.drawLine(pointarray[i].x, pointarray[i].y+2, pointarray[i+1].x, pointarray[i+1].y+2);
+			g.drawLine(i*xValueToPixels() + padding+xValueToPixels(), windowHeight-padding-20-(int)yValuesCopy[i]*yValueToPixels(), (i+1)*xValueToPixels() + padding+xValueToPixels(), windowHeight-padding-20-(int)yValuesCopy[i+1]*yValueToPixels());
+
 	}
 
 	// this method may be unnecessary...taken care of in mousePressed already
