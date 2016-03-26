@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 
 import sun.java2d.loops.DrawLine;
 
+//Isaiah Smoak, Rachel Williams, Meagan Raviele, Tim Crawford
+//ECE 309 Lab 10
 
 public class GraphPanel extends JPanel implements MouseListener {
 	

@@ -21,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+// Isaiah Smoak, Rachel Williams, Meagan Raviele, Tim Crawford
+// ECE 309 Lab 10
 
 public class GraphingCalculator implements ActionListener, KeyListener {
 	String newLine = System.lineSeparator();
