@@ -29,7 +29,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 	{
 		xValuesCopy = xValues;
 		yValuesCopy = yValues;
-		
+		addMouseListener(this);
 		// To-dos for this constructor method:
 		// 1 call addMouseListener(this); to register this panel as the MouseListener
 		// 2 Calculate Y scale values (and save them) 
@@ -169,6 +169,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 	{
 		// xTextField and yTextField are in the mini displayXYpairWindow
 		int xInPixels = me.getX();
+		System.out.println("("+me.getX()+","+me.getY()+")");
 		//doesn't account for padding???
 		double xValue = xInPixels * xPixelsToValueConversionFactor;
 		double yValue = 0;
@@ -193,7 +194,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 	public void mouseReleased(MouseEvent me) // hide tiny window
 	{
 		// "erase" mini x,y display window	
-		displayXYpairWindow.setVisible(false);
+		//displayXYpairWindow.setVisible(false);
 	}
 
 	public void mouseClicked(MouseEvent me){} // take no action
