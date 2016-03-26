@@ -13,6 +13,8 @@ import sun.java2d.loops.DrawLine;
 
 
 public class GraphPanel extends JPanel implements MouseListener {
+	
+	private GraphingCalculator graphExpre = new GraphingCalculator();
 
 	private int xPixelsToValueConversionFactor;
 	private int xValueToPixelsConversionFactor;
@@ -169,26 +171,30 @@ public class GraphPanel extends JPanel implements MouseListener {
 	{
 		// xTextField and yTextField are in the mini displayXYpairWindow
 		int xInPixels = me.getX();
-		System.out.println("("+me.getX()+","+me.getY()+")");
+		System.out.println("clicked ("+me.getX()+","+me.getY()+")");
 		//doesn't account for padding???
-		double xValue = xInPixels * xPixelsToValueConversionFactor;
+		double xValue = xInPixels / xValueToPixels();
 		double yValue = 0;
 		String xValueString = String.valueOf(xValue);
-		xTextField.setText("X = " + xValueString);
-
-		String yValueString = null;
+		System.out.println("clicked x="+xValueString);
+		//xTextField.setText("X = " + xValueString);
 		try {
-			yValue = calculator.calculateForGraph(expression,xValue);
-		} catch (Exception e) {
+			yValue = graphExpre.calculateForGraph(expression,xValue);
+			String yValueString = String.valueOf(yValue);
+			System.out.println("clicked y="+yValueString);
+			//yTextField.setText("Y = " + yValueString);
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		yValueString = String.valueOf(yValue);
-		yTextField.setText("Y = " + yValueString);
+			System.out.println("exception");
+			e1.printStackTrace();
+		}
 
 		// show mini x,y display window
-		displayXYpairWindow.setLocation(me.getX(), me.getY());
-		displayXYpairWindow.setVisible(true); 
+		//displayXYpairWindow.add(xTextField);
+		//displayXYpairWindow.add(yTextField);
+		//displayXYpairWindow.setLocation(me.getX(), me.getY());
+		//displayXYpairWindow.setSize(50, 50);
+		//displayXYpairWindow.setVisible(true); 
 	}
 
 	public void mouseReleased(MouseEvent me) // hide tiny window
