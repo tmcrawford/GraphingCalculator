@@ -14,8 +14,6 @@ import sun.java2d.loops.DrawLine;
 
 public class GraphPanel extends JPanel implements MouseListener {
 	
-	private GraphingCalculator graphExpre = new GraphingCalculator();
-
 	private int xPixelsToValueConversionFactor;
 	private int xValueToPixelsConversionFactor;
 	private int yValueToPixelsConversionFactor;
@@ -26,9 +24,11 @@ public class GraphPanel extends JPanel implements MouseListener {
 	private JFrame displayXYpairWindow;
 	private double[] xValuesCopy;
 	private double[] yValuesCopy;
+	private GraphingCalculator graphExpre;
 	private final int padding = 35; //this is padding for all borders
-	public GraphPanel (double[] xValues, double[] yValues) throws IllegalArgumentException
+	public GraphPanel (double[] xValues, double[] yValues, GraphingCalculator graphExpress) throws IllegalArgumentException
 	{
+		graphExpre = graphExpress;
 		xValuesCopy = xValues;
 		yValuesCopy = yValues;
 		addMouseListener(this);

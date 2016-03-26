@@ -140,7 +140,7 @@ public class GraphingCalculator implements ActionListener, KeyListener {
 		
 		// Array of x values
 		// Array of y values
-		graphWindow.add(new GraphPanel(xValues, yValues));// GraphPanel handles the rest
+		graphWindow.add(new GraphPanel(xValues, yValues, this));// GraphPanel handles the rest
 		graphWindow.getContentPane().setBackground(Color.black);
 	}
 	
