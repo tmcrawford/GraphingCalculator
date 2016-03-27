@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.BigDecimal;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -79,7 +80,10 @@ public class GraphPanel extends JPanel implements MouseListener {
 		for(int i = 0; i < xValuesCopy.length; i++){
 			g.drawLine(padding -5, starty, padding + 5, starty);
 			//System.out.println("at this " + i + " you get " + starty);
-			g.drawString(Double.toString(yscle[i]), 2, starty+5);
+			BigDecimal oop = new BigDecimal(yscle[i]);
+			oop = oop.setScale(2, BigDecimal.ROUND_HALF_UP);
+			
+			g.drawString(Double.toString(oop.doubleValue()), 2, starty+5);
 			starty-= ticky;
 		}
 		//begin drawing the points. 
