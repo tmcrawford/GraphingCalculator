@@ -143,7 +143,7 @@ public class GraphPanel extends JPanel implements MouseListener {
 		}
 		else{
 			yTickSize = yMax/yValuesCopy.length;
-			yMin = 0;
+			yMin = yMax/2;
 		}
 		
 		System.out.println("This is tickSize: " + Double.toString(yTickSize));   
