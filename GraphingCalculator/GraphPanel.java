@@ -173,6 +173,8 @@ public class GraphPanel extends JPanel implements MouseListener {
 
 	public void mousePressed(MouseEvent me) // show tiny x,y values window
 	{
+		if(me.getX()>getWidth()-padding)return;
+		if(me.getY()>getHeight()-padding)return;
 		int xInPixels = me.getX();
 		System.out.println("clicked ("+me.getX()+","+me.getY()+")");
 		//doesn't account for padding???
