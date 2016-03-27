@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigDecimal;
-import java.math.MathContext;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,7 +50,6 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	public final static double pi = Math.PI;
 	public final static double e =  Math.E;
 
-	
 	public ExpressionCalculator(boolean GUI) {
 		// Formatting fonts and colors
 		
@@ -69,6 +66,7 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			errorMessage.setForeground(Color.red); // Errors are labeled red
 			expressLabel.setFont(new Font("default", Font.BOLD, 20));
 			resultLabel.setFont(new Font("default", Font.BOLD, 20));
+			
 			// Formatting input box sizes
 			inputVarBox.setPreferredSize(new Dimension(100, 30)); // Set fixed size of variable box
 			inputBox.setPreferredSize(new Dimension(350, 30)); // Set fixed size of expression box
@@ -76,10 +74,12 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			inputPanel.setLayout(new GridBagLayout()); // Set layout of the panel
 			inputPanel.add(expressLabel);
 			inputPanel.add(inputBox);
+			
 			// Adding components to the second panel
 			inputPanel2.add(varLabel);
 			inputPanel2.add(inputVarBox);
 			inputPanel2.add(clearButton);
+			
 			// Formatting display area
 			Dimension display_size = new Dimension(650, 400);
 			calWindow.setSize(display_size);
@@ -88,12 +88,14 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			calWindow.setVisible(true);
 			calWindow.setTitle("Expression Calculator");
 			calWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
 			// Formatting log area
 			logArea.setSize(calWindow.getWidth() - 10, 300);
 			logPane.setSize(calWindow.getWidth() - 10, 300);
 			Dimension preferredSize = new Dimension(calWindow.getWidth() - 20, 200);
 			logPane.setPreferredSize(preferredSize);
 			logPane.setMaximumSize(preferredSize);
+			
 			// Adding components to main panel
 			mainPanel.setSize(calWindow.getWidth(), calWindow.getHeight());
 			mainPanel.setLayout(new FlowLayout());
@@ -102,6 +104,7 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			mainPanel.add(resultLabel);
 			mainPanel.add(resultBox);
 			mainPanel.add(logPane);
+			
 			// Adding main panel to the main window
 			calWindow.getContentPane().add(mainPanel);
 			calWindow.getContentPane().add(errorMessage, "South");
@@ -197,17 +200,17 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	}
 	//==========================END calculate()==============================
 
-	
 	public String calculateExpression2(String fullExpression, String xVariable) throws Exception {
 		// Macro substitution (subbing for x, pi, e, negative unary operators)
 		String localFullExpression = fullExpression;
 		localFullExpression = substitution(localFullExpression, xVariable);
-		String answer = localFullExpression; //can use an if statement...
+		String answer = localFullExpression; 
+		
 		while(isExpression(localFullExpression)){
 			// Find highest level expression in parenthesis
 			String currentSimpleExpression = findSimpleExpression(localFullExpression);
+			
 			// Evaluated answer from expression 
-
 			answer = evalSimpleExpression(currentSimpleExpression);
 
 			// Find index of where currentExpression is in localFullExpression
@@ -232,8 +235,6 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		}
 		return answer; 
 	}
-	
-	
 	
 	private String substitution(String expression, String xVariable) {
 
@@ -535,8 +536,6 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		}
 		BigDecimal pop = new BigDecimal(result);
 		pop = pop.setScale(3, BigDecimal.ROUND_DOWN);
-		
-		System.out.println("exiting: " + pop.doubleValue());
 		finalResult = Double.toString(pop.doubleValue());
 		return finalResult;
 	}
@@ -547,13 +546,11 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 	//              Replaces double negatives
 	// Developed by Meagan Raviele
 	private String substitution(String expression) {
-		System.out.println("got here2xx");
 		expression = expression.replaceAll("X",xVariable);
 		expression = expression.replaceAll("x", xVariable);
 		expression = expression.replaceAll("--", "+");
 		expression = expression.replaceAll("pi", Double.toString(Math.PI));
 		expression = expression.replaceAll("e", Double.toString(Math.E));
-		System.out.println("got herefinally");
 		return expression;
 	}
 	//==========================END subsitution()========================================
@@ -593,7 +590,6 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 				throw new IllegalArgumentException("no operator between x!");
 			if(begin != fullExpression.length()-1 && isNum(fullExpression.charAt(begin+1)))
 				throw new IllegalArgumentException("no operator between x!");
-			System.out.println(begin);
 			begin++; 
 			if(begin >= fullExpression.length()-1)
 				break;
@@ -699,7 +695,6 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 					throw new IllegalArgumentException("no operator between x!");
 				if(begin != fullExpression.length()-1 && isNum(fullExpression.charAt(begin+1)))
 					throw new IllegalArgumentException("no operator between x!");
-				System.out.println(begin);
 				begin++; 
 				if(begin >= fullExpression.length()-1)
 					break;
