@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -240,7 +243,7 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		expression = expression.replaceAll("pi", Double.toString(Math.PI));
 		expression = expression.replaceAll("e", Double.toString(Math.E));
 		return expression;
-
+		
 	}
 
 	//========================displayAnswer()=================================
@@ -530,8 +533,11 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 		default:
 			throw new IllegalArgumentException("Not a valid operator!");
 		}
-
-		finalResult = Double.toString(result);
+		BigDecimal pop = new BigDecimal(result);
+		pop = pop.setScale(5, BigDecimal.ROUND_HALF_UP);
+		pop = pop.round(new MathContext(5));
+		System.out.println("exiting: " + pop.doubleValue());
+		finalResult = Double.toString(pop.doubleValue());
 		return finalResult;
 	}
 	//==========================END evalSimpleExpression()===============================
