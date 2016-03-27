@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/* Isaiah Smoak, Rachel Williams, Meagan Raviele, Tim Crawford  
+   ECE 309 Lab 10
+*/
 
 public class GraphMenu implements ActionListener {
 	
@@ -18,7 +21,7 @@ public class GraphMenu implements ActionListener {
 	private JRadioButton accumuButton = new JRadioButton("Accumulate");
 	private JRadioButton expressButton = new JRadioButton("Expression");
 	private JRadioButton graphButton = new JRadioButton("Graphing");
-	private JFrame mainWindow = new JFrame("Lab 10 ECE 310 Project");
+	private JFrame mainWindow = new JFrame("Lab 10 ECE 309 Project");
 
 	private BusinessAccumulator accum;
 	private ExpressionCalculator expre;
@@ -48,10 +51,12 @@ public class GraphMenu implements ActionListener {
 		inputPanel.add(graphButton);
 		mainWindow.add(inputPanel);
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		 
 		if(arg0.getSource() == accumuButton ){
+			// Start Business Accumulator
 			if(expre != null){
 				expre.close();
 				expre = null;
@@ -63,8 +68,7 @@ public class GraphMenu implements ActionListener {
 			accum = new BusinessAccumulator();
 		}
 		else if(arg0.getSource() == expressButton){
-		
-	
+			// Start Expression Calculator 
 			if(grph != null){
 				grph.close();
 				grph = null;
@@ -74,10 +78,9 @@ public class GraphMenu implements ActionListener {
 				accum = null;
 			}
 			expre = new ExpressionCalculator(true);
-			//System.out.println("express");
 		}
 		else if(arg0.getSource() == graphButton){
-			
+			// Start Graphing Calculator 
 			if(accum != null){
 				accum.close();
 				accum = null;
@@ -86,13 +89,14 @@ public class GraphMenu implements ActionListener {
 				expre.close();
 				expre = null;
 			}
-			grph = new GraphingCalculator();//System.out.println("graph");
+			grph = new GraphingCalculator();
 		}
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		System.out.println(" ");
+		System.out.println("ECE 309 Lab 10: Isaiah Smoak, Meagan Raviele, Rachel Williams, Timothy Crawford");
+		System.out.println(" ");
 		new GraphMenu();
 	}
-
 }
