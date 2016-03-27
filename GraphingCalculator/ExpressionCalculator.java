@@ -534,8 +534,8 @@ public class ExpressionCalculator implements Runnable, ActionListener, KeyListen
 			throw new IllegalArgumentException("Not a valid operator!");
 		}
 		BigDecimal pop = new BigDecimal(result);
-		pop = pop.setScale(5, BigDecimal.ROUND_HALF_UP);
-		pop = pop.round(new MathContext(5));
+		pop = pop.setScale(3, BigDecimal.ROUND_DOWN);
+		
 		System.out.println("exiting: " + pop.doubleValue());
 		finalResult = Double.toString(pop.doubleValue());
 		return finalResult;
